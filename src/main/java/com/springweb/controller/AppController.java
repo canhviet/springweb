@@ -47,13 +47,25 @@ public class AppController {
         return "login";
     }
 
+    @GetMapping("/redirect-after-login")
+    public String redirectAfterLogin() {
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/profile")
+    public String viewProfile(Model model) {
+        ThanhVien thanhVien = thanhVienService.getByMaTV(id);
+        model.addAttribute("thanhVien", thanhVien);
+        return "profile";
+    }
+
 
 
     @PostMapping("/login")
     public String Login(@RequestParam String username, @RequestParam String password) {
         id = Integer.parseInt(username);
         if(thanhVienService.existsByMaTVAndPassword(id, password)) {
-            return "redirect:/user";
+            return "redirect:/redirect-after-login";
         }
         else {
             return "redirect:/login";
