@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật Thiết Bị</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</head>
+<body>
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center text-white">
+                <h2>Cập nhật thiết bị</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post" action="/thietbi/update" class="row">
+            <div class="p-3">
+                <div class="form-floating py-1 col-12">
+                    <input class="form-control border shadow" name="maTB" th:value="${maTB}"/>
+                    <label class="ms-2">Mã Thiết Bị</label>
+                    <span></span>
+                </div>
+            </div>
+            <div class="p-3">
+                <div class="form-floating py-1 col-12">
+                    <input class="form-control border shadow" name="tenTB" th:value="${tenTB}"/>
+                    <label class="ms-2">Tên Thiết Bị</label>
+                    <span></span>
+                </div>
+            </div>
+            <div class="p-3">
+                <div class="form-floating py-1 col-12">
+                    <input class="form-control border shadow" name="moTa" th:value="${moTa}"/>
+                    <label class="ms-2">Mô Tả</label>
+                    <span></span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-check-circle"></i> Cập nhật
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a class="btn btn-secondary w-100" href="/thietbi">
+                        <i class="bi bi-x-circle"></i> Trở về
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+</body>
+</html>
