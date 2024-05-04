@@ -17,11 +17,17 @@ public class TTSDServiceImpl implements TTSDService{
     private TTSDRepository ttsdRepository;
 
     @Override
-    public Page<ThietBi> listAll(int PageNum) {
-        int pageSize = 5;
+    public boolean KiemTraTrangThai(String tt, int MaTB) {
+        return ttsdRepository.KiemTraTrangThai(tt, MaTB);
+    }
 
-        Pageable pageable = PageRequest.of(PageNum - 1, pageSize);
+    @Override
+    public boolean KiemTraTonTai(int MaTB) {
+        return ttsdRepository.KiemTraTonTai(MaTB);
+    }
 
-        return ttsdRepository.getAll(pageable);
+    @Override
+    public void Save(ThongTinSD thongTinSD) {
+        ttsdRepository.save(thongTinSD);
     }
 }

@@ -18,28 +18,27 @@ function clearSearchThietBi() {
 }
 
 //add thanh vien
-$(document).ready(function() {
-    $('#register').submit(function(e) {
-        e.preventDefault();
-
-        var data = {
-            name: $('#name').val(),
-            email: $('#email').val()
-        };
-
-        $.ajax({
-            url: '/add',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            success: function(response) {
-                // Xử lý kết quả trả về từ controller
-                if (response.success) {
-                    alert('Thêm thành công');
-                } else {
-                    alert('Thêm thất bại');
-                }
-            }
-        });
-    });
-});
+// $(document).ready(function() {
+//     $('#register').submit(function(e) {
+//         e.preventDefault();
+//
+//         var data = {
+//             name: $('#name').val(),
+//             email: $('#email').val()
+//         };
+//
+//         $.ajax({
+//             url: '',
+//             method: 'POST',
+//             contentType: 'application/json',
+//             data: JSON.stringify(data),
+//             success: function(response) {
+//                 if (response.success) {
+//                     alert('Thêm thành công');
+//                 } else {
+//                     alert('Thêm thất bại');
+//                 }
+//             }
+//         });
+//     });
+// });

@@ -27,6 +27,15 @@ public class ThongTinSD {
     @Column(name = "tgdat_cho")
     private LocalDateTime  tgDatCho;
 
+    @Column(name = "trang_thai")
+    private String trang_thai;
+
+    @Column(name = "MaTV")
+    private int maTV;
+
+    @Column(name = "MaTB")
+    private int maTB;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MaTV", insertable = false, updatable = false)
     private ThanhVien thanhVien;

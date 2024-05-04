@@ -9,4 +9,6 @@ public interface ThietBiService {
     Page<ThietBi> listAll(int pageNum);
 
     List<ThietBi> getAllSearch(String keyword);
+
+    ThietBi getByMaTB(Integer MaTB);
 }

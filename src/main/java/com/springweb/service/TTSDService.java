@@ -7,5 +7,9 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface TTSDService {
-    Page<ThietBi> listAll(int PageNum);
+    boolean KiemTraTrangThai(String tt, int MaTB);
+    boolean KiemTraTonTai(int MaTB);
+
+    void Save(ThongTinSD thongTinSD);
+
 }

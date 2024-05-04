@@ -27,4 +27,9 @@ public class ThietBiServiceImpl implements ThietBiService{
         return thietBiRepository.findByTenTBContaining(keyword);
     }
 
+    @Override
+    public ThietBi getByMaTB(Integer MaTB) {
+        return thietBiRepository.getByMaTB(MaTB);
+    }
+
 }
