@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <style>
+    .profile-container {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #f0f8ff;
+    }
+    .info-heading {
+      font-weight: bold;
+      display: inline-block;
+      width: 150px;
+    }
+    .info-value {
+      display: inline-block;
+    }
+    .info-row {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center mt-4">Thông tin hồ sơ thành viên</h1>
+  <div class="profile-container">
+    <h2 class="text-center mb-4">Thông tin thành viên</h2>
+    <div class="info-row"><p class="info-heading">Mã thành viên:</p><p class="info-value"><span th:text="${thanhVien.maTV}"></span></p></div>
+    <div class="info-row"><p class="info-heading">Tên:</p><p class="info-value"><span th:text="${thanhVien.ten}"></span></p></div>
+    <div class="info-row"><p class="info-heading">Khoa:</p><p class="info-value"><span th:text="${thanhVien.khoa}"></span></p></div>
+    <div class="info-row"><p class="info-heading">Ngành:</p><p class="info-value"><span th:text="${thanhVien.nganh}"></span></p></div>
+    <div class="info-row"><p class="info-heading">Số điện thoại:</p><p class="info-value"><span th:text="${thanhVien.sdt}"></span></p></div>
+    <h2 class="text-center mt-4">Danh sách thiết bị đang mượn</h2>
+    <ul>
+      <th:block th:if="${thanhVien.listTTSD.size() == 0}">
+        <p>Không có thiết bị đang mượn.</p>
+      </th:block>
+      <th:block th:each="thietBi: ${thanhVien.listTTSD}">
+        <li>
+          <span th:text="${thietBi.thietBi.tenTB}"></span> - <span th:text="${thietBi.thietBi.moTa}"></span>
+        </li>
+      </th:block>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
