@@ -19,19 +19,23 @@ public class ThongTinSD {
     private LocalDateTime tgVao;
 
     @Column(name = "tgmuon")
-    private LocalDateTime  tgMuon;
+    private LocalDateTime tgMuon;
 
     @Column(name = "tgtra")
     private LocalDateTime tgTra;
 
     @Column(name = "tgdat_cho")
-    private LocalDateTime  tgDatCho;
+    private LocalDateTime tgDatCho;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MaTV", insertable = false, updatable = false)
+    @Column(name = "trang_thai")
+    private String trangThai;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "MaTV")
     private ThanhVien thanhVien;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MaTB", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "MaTB")
     private ThietBi thietBi;
 }
+

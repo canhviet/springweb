@@ -26,6 +26,7 @@ public class ThietBiServiceImpl implements ThietBiService{
         return thietBiRepository.findAll(pageable);
     }
 
+
     @Override
     public List<ThietBi> searchList(String keyword) {
         return thietBiRepository.findByTenTBContaining(keyword);

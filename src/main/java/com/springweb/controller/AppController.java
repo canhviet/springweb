@@ -77,7 +77,7 @@ public class AppController {
 
     @GetMapping("/user/page/{pageNum}")
     public String viewPage(Model model, @PathVariable("pageNum") int pageNum) {
-        Page<ThietBi> page = ttsdService.listAll(pageNum);
+        Page<ThietBi> page = thietBiService.listAll(pageNum);
         List<ThietBi> list = page.getContent();
 
         model.addAttribute("currentPage", pageNum);
@@ -87,26 +87,17 @@ public class AppController {
         return "user";
     }
 
-//    @GetMapping("/user/search")
-//    public String Search(Model model, @Param("keyword") String keyword) {
-//        List<ThietBi> list = thietBiService.getAllSearch(keyword);
-//
-//        model.addAttribute("keyword", keyword);
-//        model.addAttribute("listTT", list);
-//
-//        return "user";
-//    }
 
-    @GetMapping("/admin")
-    public String AdminPage() {
-        return "admin";
-    }
 
     @GetMapping("/user/datcho/{maTB}/{maTV}")
     public String DatCho(@PathVariable("maTB") int maTB, @PathVariable("maTV") int maTV, Model model) {
         model.addAttribute("MaTV", maTV);
         model.addAttribute("MaTB", maTB);
         return "datcho";
+    }
+    @GetMapping("/admin/dashboard")
+    public String DashBoard() {
+        return "/admin/dashboard";
     }
 
 }

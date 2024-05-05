@@ -1,6 +1,9 @@
 package com.springweb.controller;
 
 import com.springweb.entity.ThanhVien;
+import com.springweb.entity.ThietBi;
+import com.springweb.entity.ThongTinSD;
+import com.springweb.service.TTSDService;
 import com.springweb.service.ThanhVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,15 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 
 @Controller
-@RequestMapping("/admin/qlythanhvien")
-public class ThanhVienController {
+@RequestMapping("/admin/qlymuontra")
+public class ThongTinSDController {
     @Autowired
-    private ThanhVienService thanhVienService;
+    private TTSDService ttsdService;
 
     @GetMapping
     public String viewHomePage(Model model) {
@@ -27,31 +31,20 @@ public class ThanhVienController {
 
     @GetMapping("/page/{pageNum}")
     public String viewPage(Model model, @PathVariable("pageNum") int pageNum) {
-        Page<ThanhVien> page = thanhVienService.listAll(pageNum);
-        List<ThanhVien> list = page.getContent();
+        Page<ThongTinSD> page = ttsdService.listAll(pageNum);
+        List<ThongTinSD> list = page.getContent();
 
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("listThanhVien", list);
+        model.addAttribute("listTTSD", list);
 
-        return "/admin/qlythanhvien";
+        return "/admin/qlymuontra";
     }
 
-    @GetMapping("/delete/{id}")
-    public String DeleteThanhVien(@PathVariable Integer id) {
-        thanhVienService.DelteThanhVien(id);
-        return "redirect:/admin";
-    }
 
-    @GetMapping("/search")
-    public String SearchThanhVien(Model model, @Param("keyword") String keyword) {
-        List<ThanhVien> list= thanhVienService.searchList(keyword);
 
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("listThanhVien", list);
 
-        return "/admin/qlythanhvien";
-    }
+
 
 
 }

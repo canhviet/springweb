@@ -19,25 +19,21 @@ public class ThietBiController {
     @Autowired
     private ThietBiService thietBiService;
 
-    @GetMapping("/thietbi")
+    @GetMapping("admin/qlythietbi")
     public String viewHomePage(Model model) {
         return viewPage(model, 1);
     }
 
-    @GetMapping("/thietbi/page/{pageNum}")
+    @GetMapping("/page/{pageNum}")
     public String viewPage(Model model, @PathVariable("pageNum") int pageNum) {
         Page<ThietBi> page = thietBiService.listAll(pageNum);
-        if (page == null) {
-            return "redirect:/thietbi";
-        }
-
         List<ThietBi> list = page.getContent();
 
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("listThietBi", list);
 
-        return "thietbi/view_all_thietbi";
+        return "/admin/qlythietbi";
     }
 
     @GetMapping("thietbi/delete/{id}")
@@ -73,7 +69,7 @@ public class ThietBiController {
     @PostMapping("thietbi/add")
     public String addThietBi(@Valid @ModelAttribute("ThietBi") ThietBi thietBi, BindingResult bindingResult){
         thietBiService.SaveThietBi(thietBi);
-        return "redirect:/thietbi";
+        return "redirect:/admin/qlythietbi";
     }
 
     @PostMapping("/thietbi/update")
@@ -83,7 +79,7 @@ public class ThietBiController {
         }
 
         thietBiService.SaveThietBi(thietBi);
-        return "redirect:/thietbi";
+        return "redirect:/admin/qlythietbi";
     }
 
 
