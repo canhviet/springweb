@@ -43,4 +43,9 @@ public class ThietBiServiceImpl implements ThietBiService{
         thietBiRepository.deleteById(id);
     }
 
+    @Override
+    public List<ThietBi> getAllSearch(String keyword) {
+        return List.of();
+    }
+
 }

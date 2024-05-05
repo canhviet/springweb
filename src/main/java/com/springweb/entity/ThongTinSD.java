@@ -28,11 +28,6 @@ public class ThongTinSD {
     private LocalDateTime tgDatCho;
 
     @Column(name = "trang_thai")
-    private String trangThai;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "MaTV")
-    @Column(name = "trang_thai")
     private String trang_thai;
 
     @Column(name = "MaTV")
@@ -45,7 +40,7 @@ public class ThongTinSD {
     @JoinColumn(name = "MaTV", insertable = false, updatable = false)
     private ThanhVien thanhVien;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "MaTB")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MaTB", insertable = false, updatable = false)
     private ThietBi thietBi;
 }

@@ -29,6 +29,9 @@ public class TTSDServiceImpl implements TTSDService{
         int pageSize = 5;
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         Page<ThongTinSD> thongTinSDPage = ttsdRepository.findAll(pageable);
+
+        return thongTinSDPage;
+    }
     public boolean KiemTraTrangThai(String tt, int MaTB) {
         return ttsdRepository.KiemTraTrangThai(tt, MaTB);
     }
@@ -42,6 +45,5 @@ public class TTSDServiceImpl implements TTSDService{
     @Override
     public void Save(ThongTinSD thongTinSD) {
         ttsdRepository.save(thongTinSD);
-        return thongTinSDPage;
     }
 }
