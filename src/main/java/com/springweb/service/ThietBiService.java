@@ -15,6 +15,7 @@ public interface ThietBiService {
 
     void DelteThietBi(Integer id);
 
-    ThietBi getByMaTB(Integer id);
+    List<ThietBi> getAllSearch(String keyword);
 
+    ThietBi getByMaTB(Integer MaTB);
 }

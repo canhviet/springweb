@@ -8,11 +8,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
+import org.springframework.data.repository.query.Param;
 
 public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
+    @Query("select case when count(tb) > 0 then true else false end from ThietBi tb join tb.listTTSD ttsd where ttsd.trang_thai =:trangthai and ttsd.thietBi.maTB =:maTB")
+    boolean KiemTraTrangThai(@Param("trangthai") String tt, @Param("maTB") int MaTB);
 
-    List<ThongTinSD> getByThanhVien(ThanhVien thanhVien);
-    List<ThongTinSD> getByThietBi(ThietBi thietBi);
+    @Query("select case when count(ttsd) > 0 then true else false end from ThongTinSD ttsd where ttsd.thietBi.maTB =:maTB")
+    boolean KiemTraTonTai(@Param("maTB") int MaTB);
+
 }

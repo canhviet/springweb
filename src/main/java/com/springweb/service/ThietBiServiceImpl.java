@@ -16,20 +16,21 @@ public class ThietBiServiceImpl implements ThietBiService{
 
     @Autowired
     private ThietBiRepository thietBiRepository;
-
     @Override
     public Page<ThietBi> listAll(int pageNum) {
         int pageSize = 5;
-
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-
         return thietBiRepository.findAll(pageable);
     }
-
 
     @Override
     public List<ThietBi> searchList(String keyword) {
         return thietBiRepository.findByTenTBContaining(keyword);
+    }
+
+    @Override
+    public ThietBi getByMaTB(Integer MaTB) {
+        return thietBiRepository.getByMaTB(MaTB);
     }
 
     @Override
@@ -42,8 +43,4 @@ public class ThietBiServiceImpl implements ThietBiService{
         thietBiRepository.deleteById(id);
     }
 
-    @Override
-    public ThietBi getByMaTB(Integer id) {
-        return thietBiRepository.getByMaTB(id);
-    }
 }

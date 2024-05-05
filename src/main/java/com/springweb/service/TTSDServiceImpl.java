@@ -29,20 +29,19 @@ public class TTSDServiceImpl implements TTSDService{
         int pageSize = 5;
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         Page<ThongTinSD> thongTinSDPage = ttsdRepository.findAll(pageable);
+    public boolean KiemTraTrangThai(String tt, int MaTB) {
+        return ttsdRepository.KiemTraTrangThai(tt, MaTB);
+    }
 
-        for (ThongTinSD thongTinSD : thongTinSDPage) {
-            Hibernate.initialize(thongTinSD.getThanhVien());
-            Hibernate.initialize(thongTinSD.getThietBi());
-        }
+    @Override
+    public boolean KiemTraTonTai(int MaTB) {
+        return ttsdRepository.KiemTraTonTai(MaTB);
+    }
 
+
+    @Override
+    public void Save(ThongTinSD thongTinSD) {
+        ttsdRepository.save(thongTinSD);
         return thongTinSDPage;
-    }
-    @Override
-    public ThanhVien getByMaTV(Integer id) {
-        return thanhVienRepository.getByMaTV(id);
-    }
-    @Override
-    public ThietBi getByMaTB(Integer id) {
-        return thietBiRepository.getByMaTB(id);
     }
 }

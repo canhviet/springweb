@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -87,10 +88,23 @@ public class AppController {
         return "user";
     }
 
+    @GetMapping("/user/search")
+    public String Search(Model model, @Param("keyword") String keyword) {
+        List<ThietBi> list = thietBiService.getAllSearch(keyword);
 
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("listTB", list);
+
+        return "user";
+    }
+
+    @GetMapping("/admin")
+    public String AdminPage() {
+        return "admin";
+    }
 
     @GetMapping("/user/datcho/{maTB}/{maTV}")
-    public String DatCho(@PathVariable("maTB") int maTB, @PathVariable("maTV") int maTV, Model model) {
+    public String pageDatCho(@PathVariable("maTB") int maTB, @PathVariable("maTV") int maTV, Model model) {
         model.addAttribute("MaTV", maTV);
         model.addAttribute("MaTB", maTB);
         return "datcho";
@@ -100,4 +114,27 @@ public class AppController {
         return "/admin/dashboard";
     }
 
+    @PostMapping("/datcho")
+    public String DatCho(@RequestParam("MaTV") Integer MaTV, @RequestParam("MaTB") Integer MaTB, Model model) {
+        ThongTinSD thongTinSD = new ThongTinSD();
+        thongTinSD.setMaTB(MaTB);
+        thongTinSD.setMaTV(MaTV);
+        thongTinSD.setTrang_thai("dang dat cho");
+        thongTinSD.setTgDatCho(LocalDateTime.now());
+
+        if(ttsdService.KiemTraTrangThai("trong", MaTB) || !ttsdService.KiemTraTonTai(MaTB)) {
+            ttsdService.Save(thongTinSD);
+            return "redirect:/user";
+        }
+        String s = "text";
+        model.addAttribute("MaTV", MaTV);
+        model.addAttribute("MaTB", MaTB);
+        model.addAttribute("error", s);
+        return "datcho";
+    }
+
+    @GetMapping("/processing")
+    public String ProcessingPage(){
+        return "processing";
+    }
 }
