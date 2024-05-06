@@ -224,8 +224,8 @@
                             <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thông tin</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thời gian đặt chỗ</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thời gian đặt chỗ</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                             </thead>
@@ -233,16 +233,16 @@
                             <tr th:each="ttsd : ${listTTSD}">
                                 <td>
                                     <div class="d-flex flex-column">
-                                        <h6 class="mb-3 text-sm" th:text="'Mã thành viên: ' + ${ttsd.thanhVien.maTV}"></h6>
-                                        <h6 class="mb-3 text-sm" th:text="'Mã thiết bị: ' + ${ttsd.thietBi.maTB}"></h6>
+                                        <h6 class="mb-3 text-sm" th:text="'Mã thành viên: ' + ${ttsd.maTV}"></h6>
+                                        <h6 class="mb-3 text-sm" th:text="'Mã thiết bị: ' + ${ttsd.maTB}"></h6>
 
                                         <span class="mb-2 text-xs" th:text="'Thời gian vào: ' + ${ttsd.tgVao}"></span>
                                         <span class="mb-2 text-xs" th:text="'Thời gian mượn: ' + ${ttsd.tgMuon}"></span>
                                         <span class="mb-2 text-xs" th:text="'Thời gian trả: ' + ${ttsd.tgTra}"></span>
                                     </div>
                                 </td>
-                                <td></td>
-                                <td></td>
+                                <td th:text="${ttsd.tgDatCho}"></td>
+                                <td th:text="${ttsd.trang_thai}"></td>
                             </tr>
                             </tbody>
                         </table>
