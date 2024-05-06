@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/admin/qlythanhvien")
+@RequestMapping("/admin/thanhvien")
 public class ThanhVienController {
     @Autowired
     private ThanhVienService thanhVienService;
@@ -34,7 +34,7 @@ public class ThanhVienController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("listThanhVien", list);
 
-        return "/admin/qlythanhvien";
+        return "thanhvien/view_all_thanhvien";
     }
 
     @GetMapping("/delete/{id}")
@@ -50,7 +50,7 @@ public class ThanhVienController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("listThanhVien", list);
 
-        return "/admin/qlythanhvien";
+        return "thanhvien/view_all_thanhvien";
     }
 
 

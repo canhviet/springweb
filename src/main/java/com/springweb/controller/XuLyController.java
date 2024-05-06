@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/xulyvipham")
+@RequestMapping("/admin/xulyvipham")
 public class XuLyController {
     @Autowired
     private XuLyService xuLyServiceservice;

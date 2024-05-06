@@ -50,11 +50,6 @@ public class AppController {
         return "login";
     }
 
-    @GetMapping("/redirect-after-login")
-    public String redirectAfterLogin() {
-        return "redirect:/profile";
-    }
-
     @GetMapping("/profile")
     public String viewProfile(Model model) {
         ThanhVien thanhVien = thanhVienService.getByMaTV(id);
@@ -63,12 +58,11 @@ public class AppController {
     }
 
 
-
     @PostMapping("/login")
     public String Login(@RequestParam String username, @RequestParam String password) {
         id = Integer.parseInt(username);
         if(thanhVienService.existsByMaTVAndPassword(id, password)) {
-            return "redirect:/redirect-after-login";
+            return "redirect:/user";
         }
         else {
             return "redirect:/login";
@@ -114,7 +108,7 @@ public class AppController {
 
     @GetMapping("/admin")
     public String AdminPage() {
-        return "admin";
+        return "admin/admin";
     }
 
     @GetMapping("/user/datcho/{maTB}/{maTV}")
@@ -122,10 +116,6 @@ public class AppController {
         model.addAttribute("MaTV", maTV);
         model.addAttribute("MaTB", maTB);
         return "datcho";
-    }
-    @GetMapping("/admin/dashboard")
-    public String DashBoard() {
-        return "/admin/dashboard";
     }
 
     @PostMapping("/datcho")

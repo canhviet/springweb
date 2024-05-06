@@ -1,6 +1,5 @@
 package com.springweb.controller;
 
-import com.springweb.entity.ThanhVien;
 import com.springweb.entity.ThietBi;
 import com.springweb.service.ThietBiService;
 import jakarta.validation.Valid;
@@ -15,11 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin/thietbi")
 public class ThietBiController {
     @Autowired
     private ThietBiService thietBiService;
 
-    @GetMapping("admin/qlythietbi")
+    @GetMapping
     public String viewHomePage(Model model) {
         return viewPage(model, 1);
     }
@@ -33,16 +33,16 @@ public class ThietBiController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("listThietBi", list);
 
-        return "/admin/qlythietbi";
+        return "thietbi/view_all_thietbi";
     }
 
-    @GetMapping("thietbi/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteThietBi(@PathVariable Integer id) {
         thietBiService.DelteThietBi(id);
         return "redirect:/thietbi";
     }
 
-    @GetMapping("/thietbi/search")
+    @GetMapping("/search")
     public String searchThietBi(Model model, @RequestParam("keyword") String keyword) {
         List<ThietBi> list = thietBiService.searchList(keyword);
 
@@ -51,11 +51,11 @@ public class ThietBiController {
 
         return "thietbi/view_all_thietbi";
     }
-    @GetMapping("/add_thietbi")
+    @GetMapping("/add")
     public String add_ThietBi(Model model){
         return "thietbi/add_thietbi";
     }
-    @GetMapping("/update_thietbi/{id}")
+    @GetMapping("/update/{id}")
     public String updateThietBi(Model model, @PathVariable("id") Integer maTB) {
         ThietBi thietBi = thietBiService.getByMaTB(maTB);
 
@@ -66,20 +66,20 @@ public class ThietBiController {
         return "thietbi/update_thietbi";
     }
 
-    @PostMapping("thietbi/add")
+    @PostMapping("/add")
     public String addThietBi(@Valid @ModelAttribute("ThietBi") ThietBi thietBi, BindingResult bindingResult){
         thietBiService.SaveThietBi(thietBi);
-        return "redirect:/admin/qlythietbi";
+        return "redirect:/admin/thietbi";
     }
 
-    @PostMapping("/thietbi/update")
+    @PostMapping("/update")
     public String updateThietBi(@ModelAttribute("ThietBi") ThietBi thietBi, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            // Xử lý lỗi nếu cần
+
         }
 
         thietBiService.SaveThietBi(thietBi);
-        return "redirect:/admin/qlythietbi";
+        return "redirect:/admin/thietbi";
     }
 
 
