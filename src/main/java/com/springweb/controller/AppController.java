@@ -32,6 +32,8 @@ public class AppController {
     @Autowired
     private TTSDService ttsdService;
 
+
+
     @GetMapping
     public String HomePage() {
         return "login";
@@ -48,6 +50,12 @@ public class AppController {
         return "login";
     }
 
+    @GetMapping("/profile")
+    public String viewProfile(Model model) {
+        ThanhVien thanhVien = thanhVienService.getByMaTV(id);
+        model.addAttribute("thanhVien", thanhVien);
+        return "profile";
+    }
 
 
     @PostMapping("/login")
@@ -100,7 +108,7 @@ public class AppController {
 
     @GetMapping("/admin")
     public String AdminPage() {
-        return "admin";
+        return "admin/admin";
     }
 
     @GetMapping("/user/datcho/{maTB}/{maTV}")
@@ -108,10 +116,6 @@ public class AppController {
         model.addAttribute("MaTV", maTV);
         model.addAttribute("MaTB", maTB);
         return "datcho";
-    }
-    @GetMapping("/admin/dashboard")
-    public String DashBoard() {
-        return "/admin/dashboard";
     }
 
     @PostMapping("/datcho")
