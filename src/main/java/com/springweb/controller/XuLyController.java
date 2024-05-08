@@ -2,11 +2,12 @@ package com.springweb.controller;
 
 import com.springweb.entity.XuLy;
 import com.springweb.entity.ThanhVien;
-
+import java.time.LocalDateTime;
 import com.springweb.service.XuLyService;
 import com.springweb.repository.ThanhVienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/xuly")
@@ -57,6 +60,8 @@ public class XuLyController {
 
     @PostMapping("/add")
     public String addThietBi(@Valid @ModelAttribute("xuLy") XuLy xuLy, BindingResult bindingResult){
+        LocalDateTime ngayXlValue = LocalDateTime.parse(xuLy.getNgayXl() + ":00");
+        xuLy.setNgayXl(ngayXlValue);
         xuLyServiceservice.createXuLy(xuLy);
         return "redirect:/xuly";
     }
