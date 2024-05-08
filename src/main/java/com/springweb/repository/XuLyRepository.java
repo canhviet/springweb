@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface XuLyRepository extends JpaRepository<XuLy, Integer>{
+    List<XuLy> findByHinhThucXlContains(String key);
 }
