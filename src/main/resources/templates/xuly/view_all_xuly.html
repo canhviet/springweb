@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View All Thanh Vien</title>
+    <title>View All Xu Ly Vi Pham</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <script src="/static/js/jquery-3.7.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/script.js"></script>
 </head>
 <body>
+<<<<<<< HEAD:src/main/resources/templates/xulyvipham/view_all_xulyvipham.html
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
         <div class="container-fluid d-flex justify-content-between">
@@ -18,6 +19,80 @@
             </button>
         </div>
 
+=======
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center text-white">
+                <h2>Danh sách vi phạm</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 ">
+                <form th:action="@{/xuly/search}">
+
+                    <span class="text-white fw-bold">Tìm kiếm: </span>  <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+                    &nbsp;
+                    <input type="submit" class="btn btn-primary" value="Search" />
+                    &nbsp;
+                </form>
+            </div>
+            <div class="col-4 text-end">
+                <a href="xuly/add" class="btn btn-primary">Thêm</a>
+                <input type="button" class="btn btn-secondary" value="Clear" id="btnClear" onclick="clearSearch()" />
+            </div>
+
+
+        </div>
+    </div>
+    <table class="table table-bordered table-striped align-middle text-center">
+        <thead>
+        <tr>
+            <th>Mã XL</th>
+            <th>Mã TV</th>
+            <th>Hình thức XL</th>
+            <th>Số tiền</th>
+            <th>Ngày XL</th>
+            <th>Trạng Thái</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+
+        <tr th:each="xl: ${listXuLy}">
+            <td th:text="${xl.getMaXl()}"></td>
+            <td th:text="${xl.getThanhVien().getTen()}"></td>
+            <td th:text="${xl.getHinhThucXl()}"></td>
+            <td th:text="${xl.getSoTien()}"></td>
+            <td th:text="${xl.getNgayXl()}"></td>
+            <td th:text="${xl.getTrangThai() == 1 ? 'Đã xử lý' : 'Chưa xử lý' }"></td>
+            <td><a class="btn btn-primary" th:href="@{/xuly/Update/{id}(id=${xl.getMaXl()})}"
+                    th:id="${xl.getMaXl()}">Update</a>
+                <a class="btn btn-danger" th:href="@{/xuly/delete/{id}(id=${xl.getMaXl()})}"
+                    th:id="${xl.getMaXl()}">Delete</a>
+            </td>
+        </tr>
+
+    </table>
+    <nav aria-label="Page navigation example" style="display: flex; justify-content: center" th:unless="${keyword}">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" th:if="${currentPage > 1}" th:href="${currentPage - 1}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                <span th:unless="${currentPage > 1}"></span>
+            </li>
+            <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a th:if="${currentPage != i}" th:href="@{'/xuly/page/' + ${i}}" class="page-link">[[${i}]]</a>
+                <a th:unless="${currentPage != i}" class="page-link active">[[${i}]]</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:if="${currentPage < totalPages}" th:href="${currentPage + 1}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                <span th:unless="${currentPage < totalPages}"></span>
+            </li>
+        </ul>
+>>>>>>> khoa:src/main/resources/templates/xuly/view_all_xuly.html
     </nav>
 </header>
 <div class="container-fluid">
