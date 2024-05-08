@@ -16,5 +16,5 @@ public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
 
     @Query("select case when count(ttsd) > 0 then true else false end from ThongTinSD ttsd where ttsd.thietBi.maTB =:maTB")
     boolean KiemTraTonTai(@Param("maTB") int MaTB);
-
+    ThongTinSD getByMaTT(int MaTT);
 }

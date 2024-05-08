@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật Xử Lý Mượn Trả</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+    <style>
+        .form-floating label {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center text-white">
+                <h2>Cập nhật xử lý mượn trả</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post" action="/admin/muontra/update" class="row">
+            <div class="p-3">
+                <div class="form-floating py-1">
+                    <input class="form-control border shadow" name="maTV" th:value="${maTV}" />
+                    <label class="ms-2">Tên thành viên</label>
+                    <span class="text-danger" th:if="${#fields.hasErrors('maTV')}">
+                        <span th:errors="*{maTV}"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="p-3">
+                <div class="form-floating py-1">
+                    <input class="form-control border shadow" name="maTB" th:value="${maTB}" />
+                    <label class="ms-2">Tên thiết bị</label>
+                    <span class="text-danger" th:if="${#fields.hasErrors('maTB')}">
+                        <span th:errors="*{maTB}"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="p-3">
+                <div class="form-floating py-1">
+                    <select class="form-select border shadow" name="trang_thai" th:field="*{trang_thai}" required>
+                        <option value="" disabled>Chọn trạng thái</option>
+                        <option value="trong">Trống</option>
+                        <option value="dang dat cho">Đang đặt chỗ</option>
+                    </select>
+                    <label class="ms-2">Cập nhật trạng thái</label>
+                    <span class="text-danger" th:if="${#fields.hasErrors('trang_thai')}">
+                        <span th:errors="*{trang_thai}"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-check-circle"></i> Cập nhật
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a class="btn btn-secondary w-100" href="/admin/muontra">
+                        <i class="bi bi-x-circle"></i> Trở về
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

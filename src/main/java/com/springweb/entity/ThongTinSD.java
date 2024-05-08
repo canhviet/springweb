@@ -43,4 +43,12 @@ public class ThongTinSD {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MaTB", insertable = false, updatable = false)
     private ThietBi thietBi;
+
+    public String getTenTV() {
+        return thanhVien.getTen();
+    }
+
+    public String getTenTB() {
+        return thietBi.getTenTB();
+    }
 }

@@ -46,4 +46,8 @@ public class TTSDServiceImpl implements TTSDService{
     public void Save(ThongTinSD thongTinSD) {
         ttsdRepository.save(thongTinSD);
     }
+    @Override
+    public ThongTinSD getByMaTT(int MaTT) {
+        return ttsdRepository.getByMaTT(MaTT);
+    }
 }
