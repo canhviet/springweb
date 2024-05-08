@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="text-end">
-                        <a href="/add" class="btn btn-primary">
+                        <a href="/admin/add" class="btn btn-primary">
                             <i class="bi bi-plus-square"></i> Thêm Thiết Bị
                         </a>
                     </div>
@@ -100,10 +100,10 @@
                             <td th:text="${tb.moTa}"></td>
                             <td>
                                 <div class="w-75 btn-group" role="group">
-                                    <a class="btn btn-warning mx-2" th:href="@{/update/{id}(id=${tb.maTB})}">
+                                    <a class="btn btn-warning mx-2" th:href="@{/admin/update/{id}(id=${tb.maTB})}">
                                         <i class="bi bi-pencil-square"></i> Sửa
                                     </a>
-                                    <a class="btn btn-danger mx-2" th:href="@{/delete/{id}(id=${tb.maTB})}">
+                                    <a class="btn btn-danger mx-2" th:href="@{/admin/delete/{id}(id=${tb.maTB})}">
                                         <i class="bi bi-trash"></i> Xóa
                                     </a>
                                 </div>

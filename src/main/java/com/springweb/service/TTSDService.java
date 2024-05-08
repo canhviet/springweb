@@ -11,6 +11,8 @@ public interface TTSDService {
     boolean KiemTraTrangThai(String tt, int MaTB);
     boolean KiemTraTonTai(int MaTB);
 
+    ThongTinSD getByMaTT(int MaTT);
+    List<ThongTinSD> getDatCho();
     void Save(ThongTinSD thongTinSD);
 
 }

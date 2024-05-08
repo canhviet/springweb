@@ -15,8 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+
+import static java.time.LocalTime.now;
 
 @Controller
 @RequestMapping("/")
@@ -32,7 +36,11 @@ public class AppController {
     @Autowired
     private TTSDService ttsdService;
 
-
+    public boolean isCurrentTimeAfterOneHour(LocalDateTime localDateTime) {
+        LocalDateTime now = LocalDateTime.now();
+        Duration duration = Duration.between(localDateTime, now);
+        return duration.toHours() > 1;
+    }
 
     @GetMapping
     public String HomePage() {
@@ -54,14 +62,34 @@ public class AppController {
     public String viewProfile(Model model) {
         ThanhVien thanhVien = thanhVienService.getByMaTV(id);
         model.addAttribute("thanhVien", thanhVien);
+
         return "profile";
     }
 
+    @GetMapping("/editprofile")
+    public String editProfile(Model model) {
+        model.addAttribute("thanhVien", thanhVienService.getByMaTV(id));
+        return "editprofile";
+    }
+
+    @PostMapping("/editproflie")
+    public String updateProfile(@ModelAttribute("ThanhVien") ThanhVien thanhVien, Model model) {
+        thanhVienService.SaveThanhVien(thanhVien);
+        return "redirect:/profile";
+    }
 
     @PostMapping("/login")
     public String Login(@RequestParam String username, @RequestParam String password) {
         id = Integer.parseInt(username);
         if(thanhVienService.existsByMaTVAndPassword(id, password)) {
+            List<ThongTinSD> list = ttsdService.getDatCho();
+            for(int i = 0; i < list.size(); i++) {
+                if(isCurrentTimeAfterOneHour(list.get(i).getTgDatCho())) {
+                    ThongTinSD thongTinSD = ttsdService.getByMaTT(list.get(i).getMaTT());
+                    thongTinSD.setTrang_thai("trong");
+                    ttsdService.Save(thongTinSD);
+                }
+            }
             return "redirect:/user";
         }
         else {
@@ -115,6 +143,8 @@ public class AppController {
     public String pageDatCho(@PathVariable("maTB") int maTB, @PathVariable("maTV") int maTV, Model model) {
         model.addAttribute("MaTV", maTV);
         model.addAttribute("MaTB", maTB);
+        model.addAttribute("TenTV", thanhVienService.getByMaTV(maTV).getTen());
+        model.addAttribute("TenTB", thietBiService.getByMaTB(maTB).getTenTB());
         return "datcho";
     }
 
@@ -128,13 +158,11 @@ public class AppController {
 
         if(ttsdService.KiemTraTrangThai("trong", MaTB) || !ttsdService.KiemTraTonTai(MaTB)) {
             ttsdService.Save(thongTinSD);
+            model.addAttribute("sucess", "dat cho thanh cong");
             return "redirect:/user";
         }
-        String s = "text";
-        model.addAttribute("MaTV", MaTV);
-        model.addAttribute("MaTB", MaTB);
-        model.addAttribute("error", s);
-        return "datcho";
+        model.addAttribute("error", "Hien tai khong the dat thiet bi nay");
+        return "redirect:/user";
     }
 
     @GetMapping("/processing")

@@ -23,6 +23,7 @@ public class ThanhVienServiceImpl implements ThanhVienService {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
 
         return thanhVienRepository.findAll(pageable);
+
     }
 
     @Override

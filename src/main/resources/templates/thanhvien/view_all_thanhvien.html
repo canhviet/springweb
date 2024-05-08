@@ -96,7 +96,7 @@
                             <td th:text="${tv.getKhoa()}"></td>
                             <td th:text="${tv.getNganh()}"></td>
                             <td th:text="${tv.getSdt()}"></td>
-                            <td><a style="color: red;" th:href="@{/thanhvien/delete/{id}(id=${tv.getMaTV()})}"
+                            <td><a style="color: red;" th:href="@{/admin/thanhvien/delete/{id}(id=${tv.getMaTV()})}"
                                    class="delete_thanhvien" th:id="${tv.getMaTV()}">Delete</a></td>
                         </tr>
 

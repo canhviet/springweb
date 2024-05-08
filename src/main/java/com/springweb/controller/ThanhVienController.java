@@ -40,7 +40,7 @@ public class ThanhVienController {
     @GetMapping("/delete/{id}")
     public String DeleteThanhVien(@PathVariable Integer id) {
         thanhVienService.DelteThanhVien(id);
-        return "redirect:/admin";
+        return "redirect:/admin/thanhvien";
     }
 
     @GetMapping("/search")

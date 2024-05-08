@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</head>
+<body>
+<div class="container-fluid" style="width: 400px;">
+    <form action="/editproflie" method="POST" >
+                <div class="row align-items-center">
+                    <div class="header-text mb-4 text-center">
+                        <h2>Edit Profile</h2>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:value="${thanhVien.getMaTV()}" name="maTV" placeholder="Mã Thành Viên">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:value="${thanhVien.getTen()}" name="ten" placeholder="Họ và tên">
+
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:value="${thanhVien.getNganh()}" name="nganh" placeholder="Tên Nghành">
+
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:value="${thanhVien.getKhoa()}" name="khoa" placeholder="Tên Khoa">
+
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:value="${thanhVien.getSdt()}" name="sdt" placeholder="SDT">
+
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:value="${thanhVien.getEmail()}" name="email" placeholder="Địa chỉ email">
+
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="password" class="form-control form-control-lg bg-light fs-6" th:value="${thanhVien.getPassword()}" id="password" name="password" placeholder="Mật khẩu">
+
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" id="submitBtn" class="btn btn-lg btn-primary w-100 fs-6">Update</button>
+                    </div>
+                </div>
+            </form>
+</div>
+
+</body>
+</html>

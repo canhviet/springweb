@@ -28,6 +28,9 @@
 <body>
 <div class="container">
   <h1 class="text-center mt-4">Thông tin hồ sơ thành viên</h1>
+  <div class="col-12 text-center text-white">
+    <a href="/editprofile" class="btn btn-primary">edit profile</a>
+  </div>
   <div class="profile-container">
     <h2 class="text-center mb-4">Thông tin thành viên</h2>
     <div class="info-row"><p class="info-heading">Mã thành viên:</p><p class="info-value"><span th:text="${thanhVien.maTV}"></span></p></div>
@@ -35,16 +38,16 @@
     <div class="info-row"><p class="info-heading">Khoa:</p><p class="info-value"><span th:text="${thanhVien.khoa}"></span></p></div>
     <div class="info-row"><p class="info-heading">Ngành:</p><p class="info-value"><span th:text="${thanhVien.nganh}"></span></p></div>
     <div class="info-row"><p class="info-heading">Số điện thoại:</p><p class="info-value"><span th:text="${thanhVien.sdt}"></span></p></div>
-    <h2 class="text-center mt-4">Danh sách thiết bị đang mượn</h2>
+    <h2 class="text-center mt-4">Danh sách thiết bị</h2>
     <ul>
-      <th:block th:if="${thanhVien.listTTSD.size() == 0}">
-        <p>Không có thiết bị đang mượn.</p>
-      </th:block>
-      <th:block th:each="thietBi: ${thanhVien.listTTSD}">
-        <li>
-          <span th:text="${thietBi.thietBi.tenTB}"></span> - <span th:text="${thietBi.thietBi.moTa}"></span>
-        </li>
-      </th:block>
+      <div th:each="i : ${thanhVien.listTTSD}">
+          <li th:if="${i.getTrang_thai().equalsIgnoreCase('dang dat cho')}">
+            <span th:text="${i.thietBi.tenTB + ': Đang đặt'}"></span>
+          </li>
+          <li th:if="${i.getTrang_thai().equalsIgnoreCase('dang cho muon')}">
+              <span th:text="${i.thietBi.tenTB + ': Đang mượn'}"></span>
+          </li>
+      </div>
     </ul>
   </div>
 </div>
