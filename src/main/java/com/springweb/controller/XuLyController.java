@@ -86,5 +86,11 @@ public class XuLyController {
         xuLyServiceservice.updateXuLy(xuLy);
         return "redirect:/xuly";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteXuLy(@PathVariable Integer id) {
+        xuLyServiceservice.deleteXuLyById(id);
+        return "redirect:/xuly";
+    }
 }
 

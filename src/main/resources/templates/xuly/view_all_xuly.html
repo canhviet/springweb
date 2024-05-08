@@ -55,8 +55,7 @@
             <td th:text="${xl.getNgayXl()}"></td>
             <td th:text="${xl.getTrangThai() == 1 ? 'Đã xử lý' : 'Chưa xử lý' }"></td>
             <td><a class="btn btn-primary" th:href="@{xuly/update/{id}(id=${xl.getMaXl()})}">Update</a>
-                <a class="btn btn-danger" th:href="@{delete/{id}(id=${xl.getMaXl()})}"
-                    th:id="${xl.getMaXl()}">Delete</a>
+                <a class="btn btn-danger" th:href="@{xuly/delete/{id}(id=${xl.getMaXl()})}">Delete</a>
             </td>
         </tr>
 
