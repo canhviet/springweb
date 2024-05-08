@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 
 public interface XuLyService {
     Page<XuLy> getList(int pageNum);
+    XuLy getById(int id);
     void createXuLy(XuLy obj);
     void updateXuLy(XuLy obj);
     void deleteXuLy(XuLy obj);

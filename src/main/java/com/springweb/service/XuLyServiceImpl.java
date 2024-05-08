@@ -24,6 +24,11 @@ public class XuLyServiceImpl implements XuLyService{
     }
 
     @Override
+    public XuLy getById(int id) {
+        return  xuLyRepository.getById(id);
+    }
+
+    @Override
     public void createXuLy(XuLy obj) {
         xuLyRepository.save(obj);
     }
