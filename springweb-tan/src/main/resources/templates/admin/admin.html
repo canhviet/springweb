@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
+        <div class="container-fluid d-flex justify-content-between">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">ADMIN</span>
+            </button>
+        </div>
+
+    </nav>
+</header>
+<div class="container-fluid">
+    <div class="loading spinner" style="display:none;"></div>
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark text-light sidebar collapse">
+            <div class="position-static pt-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/thongke">
+                            <span class="me-2"><i class="bi bi-house-door"></i></span>
+                            <span>Thong Ke</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/muontra">
+                            <span class="me-2"><i class="bi bi-list-ol"></i></i></span>
+                            <span>Muon - Tra</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/thietbi">
+                            <span class="me-2"><i class="bi bi-building"></i></span>
+                            <span>Thiet Bi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/xulyvipham">
+                            <span class="me-2"><i class="bi bi-building"></i></span>
+                            <span>Vi Pham</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/thanhvien">
+                            <span class="me-2"><i class="bi bi-building"></i></span>
+                            <span>Thanh Vien</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

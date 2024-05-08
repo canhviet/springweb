@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row border rounded-4 p-4 bg-white shadow box-area">
+        <div class="col-md-5 rounded-3 d-flex justify-content-center align-items-center flex-column left-box" style="background: #103cbe;">
+            <div class="featured-image mb-3">
+                <img src="/static/images/hinh1.jpg" class="img-fluid" style="width: 300px;">
+            </div>
+        </div>
+        <div class="col-md-7 right-box">
+            <form action="/register" method="POST" id="register" th:object="${ThanhVien}">
+                <div class="row align-items-center">
+                    <div class="header-text mb-4 text-center">
+                        <h2>ĐĂNG KÝ</h2>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:field="*{maTV}" name="maTV" placeholder="Mã Thành Viên">
+                        <span class="error text-danger" th:if="${#fields.hasErrors('maTV')}" th:errors="*{maTV}">error</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:field="*{ten}" name="ten" placeholder="Họ và tên">
+                        <span class="error text-danger" th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}">error</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:field="*{nganh}" name="nganh" placeholder="Tên Nghành">
+                        <span class="error text-danger" th:if="${#fields.hasErrors('nganh')}" th:errors="*{nganh}">error</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:field="*{khoa}" name="khoa" placeholder="Tên Khoa">
+                        <span class="error text-danger" th:if="${#fields.hasErrors('khoa')}" th:errors="*{khoa}">error</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:field="*{sdt}" name="sdt" placeholder="SDT">
+                        <span class="error text-danger"th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}">error</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" th:field="*{email}" name="email" placeholder="Địa chỉ email">
+                        <span class="error text-danger" id="email-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="password" class="form-control form-control-lg bg-light fs-6" th:field="*{password}" id="password" name="password" placeholder="Mật khẩu">
+                        <span class="error text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" id="submitBtn" class="btn btn-lg btn-primary w-100 fs-6">Đăng Ký</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

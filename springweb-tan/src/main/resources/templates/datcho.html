@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt Chỗ</title>
+</head>
+<body>
+<form action="/datcho" method="post">
+    <input type="text" th:value="${MaTV}" name="MaTV" readonly>
+    <input type="text" th:value="${MaTB}" name="MaTB" readonly>
+    <p th:if="${error}" style="color: red">error</p>
+    <input type="submit" value="submit">
+</form>
+</body>
+</html>

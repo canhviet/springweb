@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Thiết Bị</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
+        <div class="container-fluid d-flex justify-content-between">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">ADMIN</span>
+            </button>
+        </div>
+
+    </nav>
+</header>
+<div class="container-fluid">
+    <div class="loading spinner" style="display:none;"></div>
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark text-light sidebar collapse">
+            <div class="position-static pt-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/thongke">
+                            <span class="me-2"><i class="bi bi-house-door"></i></span>
+                            <span>Thong Ke</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/muontra">
+                            <span class="me-2"><i class="bi bi-list-ol"></i></i></span>
+                            <span>Muon - Tra</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/thietbi">
+                            <span class="me-2"><i class="bi bi-building"></i></span>
+                            <span>Thiet Bi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/xulyvipham">
+                            <span class="me-2"><i class="bi bi-building"></i></span>
+                            <span>Vi Pham</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/thanhvien">
+                            <span class="me-2"><i class="bi bi-building"></i></span>
+                            <span>Thanh Vien</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 w-100">
+
+                <div class="w-100 card border-0 p-4">
+                    <div class="card-header bg-success bg-gradient ml-0 py-3">
+                        <div class="row">
+                            <div class="col-12 text-center text-white">
+                                <h2>Danh sách thiết bị</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <form th:action="@{/search}">
+                                Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+                                &nbsp;
+                                <input type="submit" value="Search" />
+                                &nbsp;
+                                <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <a href="/add" class="btn btn-primary">
+                            <i class="bi bi-plus-square"></i> Thêm Thiết Bị
+                        </a>
+                    </div>
+                    <table class="table table-bordered table-striped align-middle text-center">
+                        <thead>
+                        <tr>
+                            <th>Mã Thiết Bị</th>
+                            <th>Tên Thiết Bị</th>
+                            <th>Mô tả</th>
+                        </tr>
+                        </thead>
+
+                        <tr th:each="tb: ${listThietBi}">
+                            <td th:text="${tb.maTB}"></td>
+                            <td th:text="${tb.tenTB}"></td>
+                            <td th:text="${tb.moTa}"></td>
+                            <td>
+                                <div class="w-75 btn-group" role="group">
+                                    <a class="btn btn-warning mx-2" th:href="@{/update/{id}(id=${tb.maTB})}">
+                                        <i class="bi bi-pencil-square"></i> Sửa
+                                    </a>
+                                    <a class="btn btn-danger mx-2" th:href="@{/delete/{id}(id=${tb.maTB})}">
+                                        <i class="bi bi-trash"></i> Xóa
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <nav aria-label="Page navigation example" style="display: flex; justify-content: center" th:unless="${keyword}">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" th:if="${currentPage > 1}" th:href="${currentPage - 1}">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                                <span th:unless="${currentPage > 1}"></span>
+                            </li>
+                            <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                <a th:if="${currentPage != i}" th:href="@{'/thietbi/page/' + ${i}}" class="page-link">[[${i}]]</a>
+                                <a th:unless="${currentPage != i}" class="page-link active">[[${i}]]</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" th:if="${currentPage < totalPages}" th:href="${currentPage + 1}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                                <span th:unless="${currentPage < totalPages}"></span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>
