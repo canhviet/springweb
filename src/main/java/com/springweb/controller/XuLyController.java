@@ -86,5 +86,21 @@ public class XuLyController {
         xuLyServiceservice.updateXuLy(xuLy);
         return "redirect:/xuly";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteXuLy(@PathVariable Integer id) {
+        xuLyServiceservice.deleteXuLyById(id);
+        return "redirect:/xuly";
+    }
+
+    @GetMapping("/search")
+    public String searchThietBi(Model model, @RequestParam("keyword") String keyword) {
+        List<XuLy> list = xuLyServiceservice.searchList(keyword);
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("listXuLy", list);
+
+        return "/xuly/view_all_xuly";
+    }
 }
 

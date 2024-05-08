@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class XuLyServiceImpl implements XuLyService{
 
@@ -51,5 +53,9 @@ public class XuLyServiceImpl implements XuLyService{
     @Override
     public void deleteAll() {
 
+    }
+    @Override
+    public List<XuLy> searchList(String keyword) {
+        return xuLyRepository.findByHinhThucXlContains(keyword);
     }
 }

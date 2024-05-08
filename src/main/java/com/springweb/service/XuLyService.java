@@ -3,6 +3,8 @@ package com.springweb.service;
 import com.springweb.entity.XuLy;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface XuLyService {
     Page<XuLy> getList(int pageNum);
     XuLy getById(int id);
@@ -12,5 +14,5 @@ public interface XuLyService {
     void deleteXuLyById(int id);
 
     void deleteAll();
-
+    List<XuLy> searchList(String keyword);
 }
