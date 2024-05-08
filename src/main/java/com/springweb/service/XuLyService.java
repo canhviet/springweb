@@ -9,6 +9,7 @@ public interface XuLyService {
     void updateXuLy(XuLy obj);
     void deleteXuLy(XuLy obj);
     void deleteXuLyById(int id);
+
     void deleteAll();
 
 }

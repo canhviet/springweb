@@ -15,17 +15,17 @@ public class XuLy {
     @Column(name = "MaXL")
     private int maXl;
 
-    @Column(name = "HinhThucXL")
+    @Column(name = "hinh_thucxl")
     @NotNull(message = "Không được để trống hình thức xử lý")
     private String hinhThucXl;
 
-    @Column(name = "SoTien")
+    @Column(name = "so_tien")
     private int soTien;
 
     @Column(name = "NgayXL")
     private Date ngayXl;
 
-    @Column(name = "TrangThai")
+    @Column(name = "trang_thaixl")
     private int trangThai;
 
     @ManyToOne(fetch = FetchType.LAZY)
