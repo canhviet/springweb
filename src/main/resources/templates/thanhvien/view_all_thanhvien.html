@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <form th:action="@{/thanhvien/search}">
+                            <form th:action="@{/admin/thanhvien/search}">
                                 Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
                                 &nbsp;
                                 <input type="submit" value="Search" />
@@ -110,7 +110,7 @@
                                 <span th:unless="${currentPage > 1}"></span>
                             </li>
                             <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
-                                <a th:if="${currentPage != i}" th:href="@{'/thanhvien/page/' + ${i}}" class="page-link">[[${i}]]</a>
+                                <a th:if="${currentPage != i}" th:href="@{'/admin/thanhvien/page/' + ${i}}" class="page-link">[[${i}]]</a>
                                 <a th:unless="${currentPage != i}" class="page-link active">[[${i}]]</a>
                             </li>
                             <li class="page-item">

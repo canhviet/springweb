@@ -49,6 +49,14 @@
           </li>
       </div>
     </ul>
+    <h2 class="text-center mt-4">Danh sách xu phat</h2>
+    <ul>
+      <div th:each="i : ${thanhVien.listTTXL}">
+          <li th:if="${i.getTrangThai()}">
+            <span th:text="${i.getHinhThucXl()}"></span>
+          </li>
+      </div>
+    </ul>
   </div>
 </div>
 </body>

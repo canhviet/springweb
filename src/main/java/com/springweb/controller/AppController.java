@@ -125,12 +125,12 @@ public class AppController {
     }
 
     @GetMapping("/user/search")
-    public String Search(Model model, @Param("keyword") String keyword) {
+    public String Search(Model model, @Param("keyword") String keyword, @Param("MaTV") int MaTV) {
         List<ThietBi> list = thietBiService.getAllSearch(keyword);
 
         model.addAttribute("keyword", keyword);
         model.addAttribute("listTB", list);
-
+        model.addAttribute("MaTV", MaTV);
         return "user";
     }
 
@@ -151,18 +151,27 @@ public class AppController {
     @PostMapping("/datcho")
     public String DatCho(@RequestParam("MaTV") Integer MaTV, @RequestParam("MaTB") Integer MaTB, Model model) {
         ThongTinSD thongTinSD = new ThongTinSD();
-        thongTinSD.setMaTB(MaTB);
-        thongTinSD.setMaTV(MaTV);
-        thongTinSD.setTrang_thai("dang dat cho");
-        thongTinSD.setTgDatCho(LocalDateTime.now());
+        if(!ttsdService.KiemTraTonTai(MaTB)) {
 
-        if(ttsdService.KiemTraTrangThai("trong", MaTB) || !ttsdService.KiemTraTonTai(MaTB)) {
+            thongTinSD.setMaTB(MaTB);
+            thongTinSD.setMaTV(MaTV);
+            thongTinSD.setTrang_thai("dang dat cho");
+            thongTinSD.setTgDatCho(LocalDateTime.now());
             ttsdService.Save(thongTinSD);
-            model.addAttribute("sucess", "dat cho thanh cong");
             return "redirect:/user";
         }
-        model.addAttribute("error", "Hien tai khong the dat thiet bi nay");
-        return "redirect:/user";
+        else if (ttsdService.KiemTraTrangThai("trong", MaTB)) {
+            thongTinSD.setMaTB(MaTB);
+            thongTinSD.setMaTV(MaTV);
+            thongTinSD.setTrang_thai("dang dat cho");
+            thongTinSD.setTgDatCho(LocalDateTime.now());
+            ttsdService.Save(thongTinSD);
+            return "redirect:/user";
+        }
+        else {
+            model.addAttribute("error", "Hien tai khong the dat thiet bi nay");
+            return "datcho";
+        }
     }
 
     @GetMapping("/processing")
