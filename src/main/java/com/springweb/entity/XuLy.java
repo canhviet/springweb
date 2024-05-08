@@ -1,8 +1,10 @@
 package com.springweb.entity;
 
 import jakarta.persistence.*;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
 
 import java.util.Date;
 
@@ -23,10 +25,13 @@ public class XuLy {
     private int soTien;
 
     @Column(name = "NgayXL")
-    private Date ngayXl;
+    private java.time.LocalDateTime ngayXl;
 
     @Column(name = "trang_thaixl")
     private int trangThai;
+
+    @Column(name="MaTV")
+    private int maTv;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MaTV", insertable = false, updatable = false)

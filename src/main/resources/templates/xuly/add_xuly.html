@@ -21,7 +21,7 @@
         <form method="post" action="/xuly/add" class="row">
             <div class="p-3">
                 <div class="form-floating py-1 col-12">
-                    <select name="thanhVien.maTV" class="form-select border shadow">
+                    <select name="maTv" class="form-select border shadow">
                         <option th:each="thanhVien : ${listThanhVien}" th:value="${thanhVien.maTV}" th:text="${thanhVien.maTV + '-' + thanhVien.ten}"></option>
                     </select>
                     <label class="ms-2">Thành viên</label>
