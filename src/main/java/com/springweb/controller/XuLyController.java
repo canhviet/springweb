@@ -31,9 +31,6 @@ public class XuLyController {
     @Autowired
     private ThanhVienRepository thanhVienRepository;
 
-
-
-
     @GetMapping
     public String viewHomePage(Model model) {
         return viewPage(model, 1);
@@ -51,7 +48,7 @@ public class XuLyController {
     }
 
     @GetMapping("/add")
-    public String addXuLy(Model model){
+    public String addXuLy(Model model) {
         List<ThanhVien> listThanhVien = thanhVienRepository.findAll();
 
         model.addAttribute("listThanhVien", listThanhVien);
@@ -59,10 +56,35 @@ public class XuLyController {
     }
 
     @PostMapping("/add")
-    public String addThietBi(@Valid @ModelAttribute("xuLy") XuLy xuLy, BindingResult bindingResult){
+    public String addXuLy(@Valid @ModelAttribute("xuLy") XuLy xuLy, BindingResult bindingResult) {
         LocalDateTime ngayXlValue = LocalDateTime.parse(xuLy.getNgayXl() + ":00");
         xuLy.setNgayXl(ngayXlValue);
         xuLyServiceservice.createXuLy(xuLy);
         return "redirect:/xuly";
     }
+
+    @GetMapping("/update/{id}")
+    public String updateXuLy(@PathVariable("id") Integer maXl, Model model) {
+        XuLy xl = xuLyServiceservice.getById(maXl);
+        List<ThanhVien> listThanhVien = thanhVienRepository.findAll();
+
+        model.addAttribute("listThanhVien", listThanhVien);
+        model.addAttribute("maXl", xl.getMaXl());
+        model.addAttribute("soTien", xl.getSoTien());
+        model.addAttribute("trangThai", xl.getTrangThai());
+        model.addAttribute("ngayXl", xl.getNgayXl());
+        model.addAttribute("maTv", xl.getMaTv());
+        model.addAttribute("hinhThucXl", xl.getHinhThucXl());
+
+        return "xuly/update_xuly";
+    }
+
+    @PostMapping("/update")
+    public String updateXuLy(@ModelAttribute("xuLy") XuLy xuLy, BindingResult bindingResult) {
+        LocalDateTime ngayXlValue = LocalDateTime.parse(xuLy.getNgayXl() + ":00");
+        xuLy.setNgayXl(ngayXlValue);
+        xuLyServiceservice.updateXuLy(xuLy);
+        return "redirect:/xuly";
+    }
 }
+
