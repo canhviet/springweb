@@ -23,11 +23,11 @@
                     </div>
                     <div class="form-group mb-3">
                         <input type="text" class="form-control form-control-lg bg-light fs-6" id="username" name="username" placeholder="Mã Thành Viên">
-                        <span class="error text-danger" id="username-error"></span>
+                        <span th:if="${loginfail}" style="color: red">Sai Tai Khan Hoac Mat Khau</span>
+                        <span th:if="${dangvipham}" style="color: red">Ban Dang Vi Pham</span>
                     </div>
                     <div class="form-group mb-3">
                         <input type="password" class="form-control form-control-lg bg-light fs-6" id="password" name="password" placeholder="Mật khẩu">
-                        <span class="error text-danger" id="password-error"></span>
                     </div>
                     <div class="input-group mb-3">
                         <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Đăng nhập</button>

@@ -15,4 +15,6 @@ public interface XuLyService {
 
     void deleteAll();
     List<XuLy> searchList(String keyword);
+
+    boolean DangViPham(int MaTV);
 }

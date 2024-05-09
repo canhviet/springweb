@@ -42,17 +42,17 @@
     <ul>
       <div th:each="i : ${thanhVien.listTTSD}">
           <li th:if="${i.getTrang_thai().equalsIgnoreCase('dang dat cho')}">
-            <span th:text="${i.thietBi.tenTB + ': Đang đặt'}"></span>
+            <span th:text="${'Đang đặt: ' + i.thietBi.tenTB + ' - ngày đặt: ' + i.getTgDatCho().toString()}"></span>
           </li>
           <li th:if="${i.getTrang_thai().equalsIgnoreCase('dang cho muon')}">
-              <span th:text="${i.thietBi.tenTB + ': Đang mượn'}"></span>
+              <span th:text="${'Đang mượn: ' + i.thietBi.tenTB + ' - ngày mượn: ' + i.getTgMuon().toString()}"></span>
           </li>
       </div>
     </ul>
-    <h2 class="text-center mt-4">Danh sách xu phat</h2>
+    <h2 class="text-center mt-4">Đã từng vi phạm</h2>
     <ul>
       <div th:each="i : ${thanhVien.listTTXL}">
-          <li th:if="${i.getTrangThai()}">
+          <li>
             <span th:text="${i.getHinhThucXl()}"></span>
           </li>
       </div>
