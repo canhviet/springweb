@@ -37,20 +37,20 @@
       </div>
       <div class="p-3">
         <div class="form-floating py-1 col-12">
-          <select name="hinhThucXl" class="form-select border shadow">
-            <option value="Khóa thẻ 1 tháng" th:selected="${hinhThucXl == 'Khóa thẻ 1 tháng'}">Khóa thẻ 1 tháng</option>
-            <option value="Khóa thẻ 2 tháng" th:selected="${hinhThucXl == 'Khóa thẻ 2 tháng'}">Khóa thẻ 2 tháng</option>
-            <option value="Bồi thường mất tài sản" th:selected="${hinhThucXl == 'Bồi thường mất tài sản'}">Bồi thường mất tài sản</option>
-            <option value="Khóa thẻ 1 tháng và Bồi thường mất tài sản" th:selected="${hinhThucXl == 'Khóa thẻ 1 tháng và Bồi thường mất tài sản'}">Khóa thẻ 1 tháng và Bồi thường mất tài sản</option>
-            <option value="Khóa thẻ 2 tháng và Bồi thường mất tài sản" th:selected="${hinhThucXl == 'Khóa thẻ 2 tháng và Bồi thường mất tài sản'}">Khóa thẻ 2 tháng và Bồi thường mất tài sản</option>
+          <select name="hinhThucXl" id="hinhThucXl" class="form-select border shadow" onchange="showSoTienInput()">
+            <option value="Khóa thẻ 1 tháng">Khóa thẻ 1 tháng</option>
+            <option value="Khóa thẻ 2 tháng">Khóa thẻ 2 tháng</option>
+            <option value="Bồi thường mất tài sản">Bồi thường mất tài sản</option>
+            <option value="Khóa thẻ 1 tháng và Bồi thường mất tài sản">Khóa thẻ 1 tháng và Bồi thường mất tài sản</option>
+            <option value="Khóa thẻ 2 tháng và Bồi thường mất tài sản">Khóa thẻ 2 tháng và Bồi thường mất tài sản</option>
           </select>
           <label class="ms-2">Hình thức xử lý</label>
           <span></span>
         </div>
       </div>
-      <div class="p-3">
+      <div class="p-3" id="soTienInput" style="display: none;">
         <div class="form-floating py-1 col-12">
-          <input type="number" class="form-control border shadow" name="soTien" th:value="${soTien}" />
+          <input type="number" class="form-control border shadow" name="soTien"/>
           <label class="ms-2">Số tiền</label>
           <span></span>
         </div>
@@ -65,8 +65,8 @@
       <div class="p-3">
         <div class="form-floating py-1 col-12">
           <select name="trangThai" class="form-select border shadow">
-            <option value="1" th:selected="${trangThai == 1}">Đã xử lý</option>
-            <option value="0" th:selected="${trangThai == 0}">Chưa xử lý</option>
+            <option value="1" th:selected="${trangThai == 1}">Đã được xử lý</option>
+            <option value="0" th:selected="${trangThai == 0}">Đang được xử lý</option>
           </select>
           <label class="ms-2">Trạng thái</label>
           <span></span>
