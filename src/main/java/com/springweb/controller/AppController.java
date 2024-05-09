@@ -147,6 +147,7 @@ public class AppController {
         Page<ThietBi> page = thietBiService.listAll(pageNum);
         List<ThietBi> list = page.getContent();
 
+        model.addAttribute("MaTV", id);
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("listTB", list);
