@@ -10,8 +10,8 @@
 </head>
 <body>
 <div class="container-fluid" style="width: 400px;">
-    <h1>Dat Cho</h1>
-    <form action="/datcho" method="post">
+    <h1>Dat Cho Theo Ngay</h1>
+    <form action="/datchotheongay" method="post">
     <div class="form-group">
         <label for="tenTV">Ten Thanh Vien</label>
         <input type="text" class="form-control" th:value="${TenTV}" readonly id="tenTV">
@@ -21,8 +21,9 @@
         <input type="hidden" th:value="${MaTB}" name="MaTB" readonly>
         <label for="ngaydat">Ngay Dat</label>
         <input type="datetime-local" id="ngaydat" name="ngaydat" class="form-control">
-        <p th:if="${error}" style="color: red">Khong the dat</p>
-        <input type="submit" value="submit" class="btn btn-primary">
+        <p th:if="${loi}" style="color: red">ngày đặt phải sau hôm nay hơn 1 ngày</p>
+        <input type="submit" value="Submit" class="btn btn-primary">
+        <a href="/user" class="btn btn-primary" style="background-color: #0dcaf0">Home</a>
     </div>
     </form>
 </div>

@@ -50,8 +50,21 @@ public class AppController {
         return duration.toHours() > 1;
     }
 
+    public boolean isCurrentTimeBeforeOneDay(LocalDateTime ngayDat) {
+        LocalDateTime now = LocalDateTime.now();
+        return now.plusDays(1).isBefore(ngayDat);
+    }
+
     @GetMapping
     public String HomePage() {
+            List<ThongTinSD> list = ttsdService.getDatCho();
+            for(int i = 0; i < list.size(); i++) {
+                if(isCurrentTimeAfterOneHour(list.get(i).getTgDatCho())) { //sau 1 tieng khong dat cho
+                    ThongTinSD thongTinSD = ttsdService.getByMaTT(list.get(i).getMaTT());
+                    thongTinSD.setTrang_thai("trong");
+                    ttsdService.Save(thongTinSD);
+                }
+            }
         return "login";
     }
 
@@ -99,16 +112,7 @@ public class AppController {
         id = Integer.parseInt(username);
         if(thanhVienService.existsByMaTVAndPassword(id, password)) {
 
-            List<ThongTinSD> list = ttsdService.getDatCho();
-            for(int i = 0; i < list.size(); i++) {
-                if(isCurrentTimeAfterOneHour(list.get(i).getTgDatCho())) { //sau 1 tieng khong dat cho
-                    ThongTinSD thongTinSD = ttsdService.getByMaTT(list.get(i).getMaTT());
-                    thongTinSD.setTrang_thai("trong");
-                    ttsdService.Save(thongTinSD);
-                }
-            }
-
-            if (xuLyService.DangViPham(1234567)) {
+            if (xuLyService.DangViPham(id)) {
                 loginfail = false;
                 dangvipham = true;
                 return "redirect:/login";
@@ -216,7 +220,32 @@ public class AppController {
         return "datcho";
 
     }
+    @PostMapping("/datchotheongay")
+    public String DatChoTheoNgay(@RequestParam("MaTV") Integer MaTV, @RequestParam("MaTB") Integer MaTB, @RequestParam("ngaydat") String ngay, Model model) {
+        ThongTinSD thongTinSD = new ThongTinSD();
+        LocalDateTime ngayDat = LocalDateTime.parse(ngay);
+        if(!ttsdService.KiemTraTonTai(MaTB)) {
 
+            thongTinSD.setMaTB(MaTB);
+            thongTinSD.setMaTV(MaTV);
+            thongTinSD.setTrang_thai("dang dat cho");
+            thongTinSD.setTgDatCho(ngayDat);
+            thongTinSD.setTgVao(LocalDateTime.now());
+            ttsdService.Save(thongTinSD);
+            return "redirect:/user";
+        }
+        if (isCurrentTimeBeforeOneDay(ngayDat)) {
+            thongTinSD.setMaTB(MaTB);
+            thongTinSD.setMaTV(MaTV);
+            thongTinSD.setTrang_thai("dang dat cho");
+            thongTinSD.setTgDatCho(ngayDat);
+            ttsdService.Save(thongTinSD);
+            return "redirect:/user";
+        }
+        model.addAttribute("loi", "loi");
+        return "datchotheongay";
+
+    }
     @GetMapping("/processing")
     public String ProcessingPage(){
         return "processing";
