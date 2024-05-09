@@ -15,6 +15,7 @@ public interface TTSDService {
     List<ThongTinSD> getDatCho();
     void Save(ThongTinSD thongTinSD);
 
+    List<ThongTinSD> getByMaTB(int MaTB);
     boolean MuonLai(int MaTB, int MaTV);
     ThongTinSD getByMaTVAndMaTB(int MaTV, int MaTB);
 }
