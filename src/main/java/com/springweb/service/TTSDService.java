@@ -22,9 +22,6 @@ public interface TTSDService {
 
     Page<ThongTinSD> getThanhVienVao(int pageNum);
 
-    List<ThongTinSD> findByThangNam(int thang, int nam);
-    List<ThongTinSD> findByNam(int nam);
-
     List<ThongTinSD> findByNgay(LocalDateTime s, LocalDateTime e);
 
     Page<ThongTinSD> getThanhVienDangMuon(int pageNum);
@@ -32,4 +29,5 @@ public interface TTSDService {
     List<ThongTinSD> getTbDangMuonTheoTime(LocalDateTime s, LocalDateTime e);
 
     List<ThongTinSD> getThanhVienDangMuon();
+    List<ThongTinSD> findBytgVaoNotNull();
 }

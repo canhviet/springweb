@@ -47,8 +47,17 @@ public class ThongTinSD {
     public String getTenTV() {
         return thanhVien.getTen();
     }
+    public String getKhoa() {
+        return thanhVien.getKhoa();
+    }
+
+    public String getNganh() {
+        return thanhVien.getNganh();
+    }
+
 
     public String getTenTB() {
         return thietBi.getTenTB();
     }
+
 }
