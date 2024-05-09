@@ -61,6 +61,11 @@ public class TTSDServiceImpl implements TTSDService{
     }
 
     @Override
+    public List<ThongTinSD> getByMaTB(int MaTB) {
+        return ttsdRepository.getByMaTB(MaTB);
+    }
+
+    @Override
     public boolean MuonLai(int MaTB, int MaTV) {
         return ttsdRepository.MuonLai(MaTB, MaTV);
     }

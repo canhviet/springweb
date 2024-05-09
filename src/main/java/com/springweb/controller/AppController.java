@@ -50,9 +50,16 @@ public class AppController {
         return duration.toHours() > 1;
     }
 
-    public boolean isCurrentTimeBeforeOneDay(LocalDateTime ngayDat) {
-        LocalDateTime now = LocalDateTime.now();
-        return now.plusDays(1).isBefore(ngayDat);
+    public boolean isSameDay(LocalDateTime date, int MaTB) {
+        List<ThongTinSD> list = ttsdService.getByMaTB(MaTB);
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i).getTgDatCho().getYear() == date.getYear() &&
+               list.get(i).getTgDatCho().getMonthValue() == date.getMonthValue() &&
+               list.get(i).getTgDatCho().getDayOfMonth() == date.getDayOfMonth()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @GetMapping
@@ -178,50 +185,9 @@ public class AppController {
         return "datcho";
     }
 
-    @GetMapping("/user/datchotheongay/{maTB}/{maTV}")
-    public String pageDatChoTheoNgay(@PathVariable("maTB") int maTB, @PathVariable("maTV") int maTV, Model model) {
-        model.addAttribute("MaTV", maTV);
-        model.addAttribute("MaTB", maTB);
-        model.addAttribute("TenTV", thanhVienService.getByMaTV(maTV).getTen());
-        model.addAttribute("TenTB", thietBiService.getByMaTB(maTB).getTenTB());
-        return "datchotheongay";
-    }
 
     @PostMapping("/datcho")
-    public String DatCho(@RequestParam("MaTV") Integer MaTV, @RequestParam("MaTB") Integer MaTB, Model model) {
-        ThongTinSD thongTinSD = new ThongTinSD();
-        if(!ttsdService.KiemTraTonTai(MaTB)) {
-
-            thongTinSD.setMaTB(MaTB);
-            thongTinSD.setMaTV(MaTV);
-            thongTinSD.setTrang_thai("dang dat cho");
-            thongTinSD.setTgDatCho(LocalDateTime.now());
-            thongTinSD.setTgVao(LocalDateTime.now());
-            ttsdService.Save(thongTinSD);
-            return "redirect:/user";
-        }
-        if (ttsdService.MuonLai(MaTB, MaTV) && !ttsdService.KiemTraTrangThai("dang dat cho", MaTB) && !ttsdService.KiemTraTrangThai("dang cho muon", MaTB)) {
-            thongTinSD = ttsdService.getByMaTVAndMaTB(MaTV, MaTB);
-            thongTinSD.setTrang_thai("dang dat cho");
-            thongTinSD.setTgDatCho(LocalDateTime.now());
-            ttsdService.Save(thongTinSD);
-            return "redirect:/user";
-        }
-        if (!ttsdService.KiemTraTrangThai("dang dat cho", MaTB) && !ttsdService.KiemTraTrangThai("dang cho muon", MaTB)) {
-            thongTinSD.setMaTB(MaTB);
-            thongTinSD.setMaTV(MaTV);
-            thongTinSD.setTrang_thai("dang dat cho");
-            thongTinSD.setTgDatCho(LocalDateTime.now());
-            ttsdService.Save(thongTinSD);
-            return "redirect:/user";
-        }
-
-        model.addAttribute("error", "Hien tai khong the dat thiet bi nay");
-        return "datcho";
-
-    }
-    @PostMapping("/datchotheongay")
-    public String DatChoTheoNgay(@RequestParam("MaTV") Integer MaTV, @RequestParam("MaTB") Integer MaTB, @RequestParam("ngaydat") String ngay, Model model) {
+    public String DatCho(@RequestParam("MaTV") Integer MaTV, @RequestParam("MaTB") Integer MaTB, Model model, @RequestParam("ngaydat") String ngay) {
         ThongTinSD thongTinSD = new ThongTinSD();
         LocalDateTime ngayDat = LocalDateTime.parse(ngay);
         if(!ttsdService.KiemTraTonTai(MaTB)) {
@@ -229,12 +195,19 @@ public class AppController {
             thongTinSD.setMaTB(MaTB);
             thongTinSD.setMaTV(MaTV);
             thongTinSD.setTrang_thai("dang dat cho");
-            thongTinSD.setTgDatCho(ngayDat);
-            thongTinSD.setTgVao(LocalDateTime.now());
+            thongTinSD.setTgDatCho(LocalDateTime.now());
+            thongTinSD.setTgVao(ngayDat);
             ttsdService.Save(thongTinSD);
             return "redirect:/user";
         }
-        if (isCurrentTimeBeforeOneDay(ngayDat)) {
+        if (ttsdService.MuonLai(MaTB, MaTV) && !ttsdService.KiemTraTrangThai("dang dat cho", MaTB) && !ttsdService.KiemTraTrangThai("dang cho muon", MaTB)) {
+            thongTinSD = ttsdService.getByMaTVAndMaTB(MaTV, MaTB);
+            thongTinSD.setTrang_thai("dang dat cho");
+            thongTinSD.setTgDatCho(ngayDat);
+            ttsdService.Save(thongTinSD);
+            return "redirect:/user";
+        }
+        if (!ttsdService.KiemTraTrangThai("dang dat cho", MaTB) && !ttsdService.KiemTraTrangThai("dang cho muon", MaTB)) {
             thongTinSD.setMaTB(MaTB);
             thongTinSD.setMaTV(MaTV);
             thongTinSD.setTrang_thai("dang dat cho");
@@ -242,8 +215,23 @@ public class AppController {
             ttsdService.Save(thongTinSD);
             return "redirect:/user";
         }
-        model.addAttribute("loi", "loi");
-        return "datchotheongay";
+
+        if (!isSameDay(ngayDat, MaTB) ) {
+            thongTinSD.setMaTB(MaTB);
+            thongTinSD.setMaTV(MaTV);
+            thongTinSD.setTrang_thai("dang dat cho");
+            thongTinSD.setTgDatCho(ngayDat);
+            ttsdService.Save(thongTinSD);
+            return "redirect:/user";
+        }
+
+        model.addAttribute("MaTV", MaTV);
+        model.addAttribute("MaTB", MaTB);
+        model.addAttribute("TenTV", thanhVienService.getByMaTV(MaTV).getTen());
+        model.addAttribute("TenTB", thietBiService.getByMaTB(MaTB).getTenTB());
+        model.addAttribute("error", "Hien tai khong the dat thiet bi nay");
+
+        return "datcho";
 
     }
     @GetMapping("/processing")
