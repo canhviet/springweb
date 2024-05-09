@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/xuly")
+@RequestMapping("/admin/xuly")
 public class XuLyController {
     @Autowired
     private XuLyService xuLyServiceservice;
@@ -60,7 +60,7 @@ public class XuLyController {
         LocalDateTime ngayXlValue = LocalDateTime.parse(xuLy.getNgayXl() + ":00");
         xuLy.setNgayXl(ngayXlValue);
         xuLyServiceservice.createXuLy(xuLy);
-        return "redirect:/xuly";
+        return "redirect:/admin/xuly";
     }
 
     @GetMapping("/update/{id}")
@@ -84,13 +84,13 @@ public class XuLyController {
         LocalDateTime ngayXlValue = LocalDateTime.parse(xuLy.getNgayXl() + ":00");
         xuLy.setNgayXl(ngayXlValue);
         xuLyServiceservice.updateXuLy(xuLy);
-        return "redirect:/xuly";
+        return "redirect:/admin/xuly";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteXuLy(@PathVariable Integer id) {
         xuLyServiceservice.deleteXuLyById(id);
-        return "redirect:/xuly";
+        return "redirect:/admin/xuly";
     }
 
     @GetMapping("/search")
@@ -100,7 +100,7 @@ public class XuLyController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("listXuLy", list);
 
-        return "/xuly/view_all_xuly";
+        return "/admin/xuly/view_all_xuly";
     }
 }
 
