@@ -117,7 +117,7 @@ public class AppController {
                 dangvipham = true;
                 return "redirect:/login";
             }
-
+            model.addAttribute("MaTV", id);
             return "redirect:/user";
         }
 
@@ -150,7 +150,7 @@ public class AppController {
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("listTB", list);
-
+        model.addAttribute("MaTV", id);
         return "user";
     }
 
