@@ -103,7 +103,7 @@ public class AppController {
             for(int i = 0; i < list.size(); i++) {
                 if(isCurrentTimeAfterOneHour(list.get(i).getTgDatCho())) { //sau 1 tieng khong dat cho
                     ThongTinSD thongTinSD = ttsdService.getByMaTT(list.get(i).getMaTT());
-                    thongTinSD.setTrang_thai("huy dat cho");
+                    thongTinSD.setTrang_thai("trong");
                     ttsdService.Save(thongTinSD);
                 }
             }
