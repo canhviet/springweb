@@ -14,4 +14,6 @@ public interface TTSDService {
     void Save(ThongTinSD thongTinSD);
 
     ThongTinSD getByMaTT(int maTT);
+
+    ThongTinSD getByMaTVAndMaTB(int MaTV, int MaTB);
 }

@@ -50,4 +50,9 @@ public class TTSDServiceImpl implements TTSDService{
     public ThongTinSD getByMaTT(int MaTT) {
         return ttsdRepository.getByMaTT(MaTT);
     }
+
+    @Override
+    public ThongTinSD getByMaTVAndMaTB(int MaTV, int MaTB) {
+        return ttsdRepository.getByMaTVAndMaTB(MaTV, MaTB);
+    }
 }

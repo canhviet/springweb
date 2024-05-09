@@ -62,8 +62,9 @@ public class ThongTinSDController {
     }
 
     @PostMapping("/update")
-    public String update_MuonTra(@ModelAttribute("ThongTinSD") ThongTinSD thongTinSD, BindingResult bindingResult, @RequestParam("trang_thai") String trang_thai) {
-        thongTinSD.setTrang_thai(trang_thai);
+    public String update_MuonTra(@ModelAttribute("ThongTinSD") ThongTinSD thongTinSD) {
+        ThongTinSD tt = ttsdService.getByMaTVAndMaTB(thongTinSD.getMaTV(), thongTinSD.getMaTB());
+        tt.setTrang_thai(thongTinSD.getTrang_thai());
         ttsdService.Save(thongTinSD);
         return "redirect:/admin/muontra";
     }
