@@ -45,7 +45,7 @@ public class ThietBiServiceImpl implements ThietBiService{
 
     @Override
     public List<ThietBi> getAllSearch(String keyword) {
-        return List.of();
+        return thietBiRepository.findByTenTBContaining(keyword);
     }
 
 }

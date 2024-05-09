@@ -45,4 +45,7 @@ public class ThanhVien {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "thanhVien")
     private List<ThongTinSD> listTTSD;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "thanhVien")
+    private List<XuLy> listTTXL;
 }

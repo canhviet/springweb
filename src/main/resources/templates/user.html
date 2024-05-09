@@ -16,13 +16,14 @@
                 <h2>Danh sách thiết bị</h2>
             </div>
             <div class="col-12 text-center text-white">
-                <button><a href="/profile">view profile</a></button>
+                <a class="btn btn-primary" href="/profile">view profile</a>
             </div>
         </div>
         <div class="row">
             <form th:action="@{/user/search}">
                 Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
-                &nbsp;
+                &nbsp
+                <input type="hidden" th:value="${MaTV}" name="MaTV">
                 <input type="submit" value="Search" />
                 &nbsp;
                 <input type="button" value="Clear" id="btnClear" onclick="clearSearchThietBi()" />

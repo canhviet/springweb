@@ -41,6 +41,16 @@ public class TTSDServiceImpl implements TTSDService{
         return ttsdRepository.KiemTraTonTai(MaTB);
     }
 
+    @Override
+    public ThongTinSD getByMaTT(int MaTT) {
+        return ttsdRepository.getByMaTT(MaTT);
+    }
+
+    @Override
+    public List<ThongTinSD> getDatCho() {
+        return ttsdRepository.getThietBiDangDat();
+    }
+
 
     @Override
     public void Save(ThongTinSD thongTinSD) {
