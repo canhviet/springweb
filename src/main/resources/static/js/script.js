@@ -10,13 +10,21 @@ $(document).ready(function () {
 });
 
 function clearSearch() {
-    window.location = "/thanhvien";
+    window.location = "/admin/thanhvien";
 }
 
 function clearSearchThietBi() {
-    window.location = "/user";
+    window.location = "/admin/thietbi";
 }
 
 function clearSearchThongKeTTSD() {
     window.location = "/admin/thongke/TTSD"
+}
+
+function clearSearchThongKeTBDangMuon() {
+    window.location = "/admin/thongke/TBDangMuon"
+}
+
+function clearSearchXuly() {
+    window.location = "/admin/xuly";
 }
