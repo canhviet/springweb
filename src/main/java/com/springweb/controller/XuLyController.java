@@ -100,7 +100,7 @@ public class XuLyController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("listXuLy", list);
 
-        return "/admin/xuly/view_all_xuly";
+        return "/xuly/view_all_xuly";
     }
 }
 
