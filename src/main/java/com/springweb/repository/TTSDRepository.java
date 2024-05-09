@@ -35,6 +35,8 @@ public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
 
     ThongTinSD getByMaTT(int MaTT);
 
+    List<ThongTinSD> getByMaTB(int MaTB);
+
     ThongTinSD getByMaTVAndMaTB(int MaTV, int MaTB);
 
     Page<ThongTinSD> findByTgMuonNotNull(Pageable pageable);
