@@ -83,19 +83,6 @@ public class TTSDServiceImpl implements TTSDService{
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         return ttsdRepository.findBytgVaoNotNull(pageable);
     }
-    @Override
-    public List<ThongTinSD> findByThangNam(int thang, int nam) { // tg vao
-        LocalDateTime startDate = LocalDateTime.of(nam, thang, 1, 0, 0);
-        LocalDateTime endDate = LocalDateTime.of(nam, thang, YearMonth.of(nam, thang).lengthOfMonth(), 23, 59, 59);
-        return ttsdRepository.findByThangNam(startDate, endDate);
-    }
-
-    @Override
-    public List<ThongTinSD> findByNam(int nam) { // tg vao
-        LocalDateTime startDate = LocalDateTime.of(nam, 1, 1, 0, 0);
-        LocalDateTime endDate = LocalDateTime.of(nam, 12, 31, 23, 59, 59);
-        return ttsdRepository.findByThangNam(startDate, endDate);
-    }
 
     @Override // tg vao
     public List<ThongTinSD> findByNgay(LocalDateTime s, LocalDateTime e) {
@@ -114,6 +101,11 @@ public class TTSDServiceImpl implements TTSDService{
     @Override
     public List<ThongTinSD> getThanhVienDangMuon() {
         return ttsdRepository.findByTgMuonNotNull();
+    }
+
+    @Override
+    public List<ThongTinSD> findBytgVaoNotNull() {
+        return ttsdRepository.findBytgVaoNotNull();
     }
 
     @Override
