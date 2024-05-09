@@ -189,6 +189,7 @@ public class AppController {
 
     @PostMapping("/datcho")
     public String DatCho(@RequestParam("MaTV") Integer MaTV, @RequestParam("MaTB") Integer MaTB, Model model) {
+        MaTV = id;
         ThongTinSD thongTinSD = new ThongTinSD();
         if(!ttsdService.KiemTraTonTai(MaTB)) {
 
