@@ -37,12 +37,7 @@ public class TTSDServiceImpl implements TTSDService{
         return ttsdRepository.KiemTraTrangThai(tt, MaTB);
     }
 
-    @Override
-    public Page<ThongTinSD> getThanhVienVao(int pageNum) {
-        int pageSize = 5;
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        return ttsdRepository.findBytgVaoNotNull(pageable);
-    }
+
 
     @Override
     public boolean KiemTraTonTai(int MaTB) {
@@ -77,23 +72,49 @@ public class TTSDServiceImpl implements TTSDService{
 
 
 
-    // tg vao
     @Override
-    public List<ThongTinSD> findByThangNam(int thang, int nam) {
+    public Page<ThongTinSD> getThanhVienVao(int pageNum) {
+        int pageSize = 5;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return ttsdRepository.findBytgVaoNotNull(pageable);
+    }
+    @Override
+    public List<ThongTinSD> findByThangNam(int thang, int nam) { // tg vao
         LocalDateTime startDate = LocalDateTime.of(nam, thang, 1, 0, 0);
         LocalDateTime endDate = LocalDateTime.of(nam, thang, YearMonth.of(nam, thang).lengthOfMonth(), 23, 59, 59);
         return ttsdRepository.findByThangNam(startDate, endDate);
     }
 
     @Override
-    public List<ThongTinSD> findByNam(int nam) {
+    public List<ThongTinSD> findByNam(int nam) { // tg vao
         LocalDateTime startDate = LocalDateTime.of(nam, 1, 1, 0, 0);
         LocalDateTime endDate = LocalDateTime.of(nam, 12, 31, 23, 59, 59);
         return ttsdRepository.findByThangNam(startDate, endDate);
     }
 
-    @Override
+    @Override // tg vao
     public List<ThongTinSD> findByNgay(LocalDateTime s, LocalDateTime e) {
         return ttsdRepository.findByThangNam(s,e);
     }
+
+
+    // tg muon
+    @Override
+    public Page<ThongTinSD> getThanhVienDangMuon(int pageNum) {
+        int pageSize = 5;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return ttsdRepository.findByTgMuonNotNull(pageable);
+    }
+
+    @Override
+    public List<ThongTinSD> getThanhVienDangMuon() {
+        return ttsdRepository.findByTgMuonNotNull();
+    }
+
+    @Override
+    public List<ThongTinSD> getTbDangMuonTheoTime(LocalDateTime s, LocalDateTime e) {
+        return ttsdRepository.getTbDangMuonTheoTime(s,e);
+    }
+
+
 }

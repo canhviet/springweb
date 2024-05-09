@@ -20,3 +20,7 @@ function clearSearchThietBi() {
 function clearSearchThongKeTTSD() {
     window.location = "/admin/thongke/TTSD"
 }
+
+function clearSearchThongKeTBDangMuon() {
+    window.location = "/admin/thongke/TBDangMuon"
+}

@@ -39,7 +39,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Số lượng thành viên vào khu vực học tập</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="/admin/thongke/TBDangMuon">Thiết bị đang được mượn</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
@@ -116,7 +116,7 @@
                                 <td th:text="${ttsd.tenTV}"></td>
                                 <td th:text="${ttsd.thanhVien.khoa}"></td>
                                 <td th:text="${ttsd.thanhVien.nganh}"></td>
-                                <td th:text="${ttsd.tgVao}"></td>
+                                <td th:text="${#temporals.format(ttsd.tgVao, 'dd/MM/yyyy HH:mm:ss')}"></td>
                             </tr>
 
                         </table>
@@ -129,7 +129,7 @@
                                     <span th:unless="${currentPage > 1}"></span>
                                 </li>
                                 <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
-                                    <a th:if="${currentPage != i}" th:href="@{'/admin/thongke/TTSD/page/' + ${i}}" class="page-link">[[${i}]]</a>
+                                    <a th:if="${currentPage != i}" th:href="@{'/admin/thongke/pageTTSD/' + ${i}}" class="page-link">[[${i}]]</a>
                                     <a th:unless="${currentPage != i}" class="page-link active">[[${i}]]</a>
                                 </li>
                                 <li class="page-item">
@@ -140,6 +140,7 @@
                                 </li>
                             </ul>
                         </nav>
+
                     </div>
                 </div>
 </body>
