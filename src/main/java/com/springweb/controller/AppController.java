@@ -200,23 +200,15 @@ public class AppController {
             ttsdService.Save(thongTinSD);
             return "redirect:/user";
         }
-        if (ttsdService.MuonLai(MaTB, MaTV) && !ttsdService.KiemTraTrangThai("dang dat cho", MaTB) && !ttsdService.KiemTraTrangThai("dang cho muon", MaTB)) {
-            thongTinSD = ttsdService.getByMaTVAndMaTB(MaTV, MaTB);
-            thongTinSD.setTrang_thai("dang dat cho");
-            thongTinSD.setTgDatCho(ngayDat);
-            ttsdService.Save(thongTinSD);
-            return "redirect:/user";
-        }
-        if (!ttsdService.KiemTraTrangThai("dang dat cho", MaTB) && !ttsdService.KiemTraTrangThai("dang cho muon", MaTB)) {
-            thongTinSD.setMaTB(MaTB);
-            thongTinSD.setMaTV(MaTV);
-            thongTinSD.setTrang_thai("dang dat cho");
-            thongTinSD.setTgDatCho(ngayDat);
-            ttsdService.Save(thongTinSD);
-            return "redirect:/user";
-        }
 
-        if (!isSameDay(ngayDat, MaTB) ) {
+        if (!isSameDay(ngayDat, MaTB)) {
+            if(ttsdService.MuonLai(MaTB, MaTV)) {
+                thongTinSD = ttsdService.getByMaTVAndMaTB(MaTV, MaTB);
+                thongTinSD.setTrang_thai("dang dat cho");
+                thongTinSD.setTgDatCho(ngayDat);
+                ttsdService.Save(thongTinSD);
+                return "redirect:/user";
+            }
             thongTinSD.setMaTB(MaTB);
             thongTinSD.setMaTV(MaTV);
             thongTinSD.setTrang_thai("dang dat cho");
