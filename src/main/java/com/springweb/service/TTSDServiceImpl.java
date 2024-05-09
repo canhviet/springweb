@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.*;
 import java.util.List;
 
 @Service
@@ -34,6 +35,13 @@ public class TTSDServiceImpl implements TTSDService{
     }
     public boolean KiemTraTrangThai(String tt, int MaTB) {
         return ttsdRepository.KiemTraTrangThai(tt, MaTB);
+    }
+
+    @Override
+    public Page<ThongTinSD> getThanhVienVao(int pageNum) {
+        int pageSize = 5;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return ttsdRepository.findBytgVaoNotNull(pageable);
     }
 
     @Override
@@ -65,5 +73,27 @@ public class TTSDServiceImpl implements TTSDService{
     @Override
     public ThongTinSD getByMaTVAndMaTB(int MaTV, int MaTB) {
         return ttsdRepository.getByMaTVAndMaTB(MaTV, MaTB);
+    }
+
+
+
+    // tg vao
+    @Override
+    public List<ThongTinSD> findByThangNam(int thang, int nam) {
+        LocalDateTime startDate = LocalDateTime.of(nam, thang, 1, 0, 0);
+        LocalDateTime endDate = LocalDateTime.of(nam, thang, YearMonth.of(nam, thang).lengthOfMonth(), 23, 59, 59);
+        return ttsdRepository.findByThangNam(startDate, endDate);
+    }
+
+    @Override
+    public List<ThongTinSD> findByNam(int nam) {
+        LocalDateTime startDate = LocalDateTime.of(nam, 1, 1, 0, 0);
+        LocalDateTime endDate = LocalDateTime.of(nam, 12, 31, 23, 59, 59);
+        return ttsdRepository.findByThangNam(startDate, endDate);
+    }
+
+    @Override
+    public List<ThongTinSD> findByNgay(LocalDateTime s, LocalDateTime e) {
+        return ttsdRepository.findByThangNam(s,e);
     }
 }

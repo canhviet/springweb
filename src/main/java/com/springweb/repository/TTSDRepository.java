@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
@@ -22,8 +24,14 @@ public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
     @Query("select distinct tt from ThongTinSD tt where tt.trang_thai = 'dang dat cho'")
     List<ThongTinSD> getThietBiDangDat();
 
+    Page<ThongTinSD> findBytgVaoNotNull(Pageable pageable);
+
+    @Query("SELECT tt FROM ThongTinSD tt WHERE tt.tgVao >= :startDate AND tt.tgVao < :endDate")
+    List<ThongTinSD> findByThangNam(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
     @Query("select distinct tt from ThongTinSD tt where tt.trang_thai = 'dang cho muon' or tt.trang_thai = 'dang dat cho'")
     Page<ThongTinSD> findAllTrangThai(Pageable pageable);
+
 
     ThongTinSD getByMaTT(int MaTT);
 
