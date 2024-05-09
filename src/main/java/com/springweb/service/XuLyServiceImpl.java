@@ -58,4 +58,9 @@ public class XuLyServiceImpl implements XuLyService{
     public List<XuLy> searchList(String keyword) {
         return xuLyRepository.findByHinhThucXlContains(keyword);
     }
+
+    @Override
+    public boolean DangViPham(int MaTV) {
+        return xuLyRepository.DangViPham(MaTV);
+    }
 }

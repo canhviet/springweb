@@ -69,24 +69,13 @@
                                 <h2>Danh sách mượn trả</h2>
                             </div>
                         </div>
-                        <div class="row">
-                            <form th:action="@{/admin/muontra/search}">
-                                Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
-                                &nbsp;
-                                <input type="submit" value="Search" />
-                                &nbsp;
-                                <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-                            </form>
-                        </div>
                     </div>
                     <table class="table table-bordered table-striped align-middle text-center">
                         <thead>
                         <tr>
                             <th>Tên Thành Viên</th>
                             <th>Thiết Bị Mượn</th>
-                            <th>Thời gian vào</th>
                             <th>Thời gian mượn</th>
-                            <th>Thời gian trả</th>
                             <th>Thời gian đặt chỗ</th>
                             <th>Trạng thái</th>
                             <th>Action</th>
@@ -97,9 +86,7 @@
                         <tr th:each="ttsd: ${listTTSD}">
                             <td th:text="${ttsd.tenTV}"></td>
                             <td th:text="${ttsd.tenTB}"></td>
-                            <td th:text="${ttsd.tgVao}"></td>
                             <td th:text="${ttsd.tgMuon}"></td>
-                            <td th:text="${ttsd.tgTra}"></td>
                             <td th:text="${ttsd.tgDatCho}"></td>
                             <td th:text="${ttsd.trang_thai}"></td>
                             <td>

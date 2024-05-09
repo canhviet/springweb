@@ -49,10 +49,10 @@
           </li>
       </div>
     </ul>
-    <h2 class="text-center mt-4">Danh sách xu phat</h2>
+    <h2 class="text-center mt-4">Đã từng vi phạm</h2>
     <ul>
       <div th:each="i : ${thanhVien.listTTXL}">
-          <li th:if="${i.getTrangThai()}">
+          <li>
             <span th:text="${i.getHinhThucXl()}"></span>
           </li>
       </div>

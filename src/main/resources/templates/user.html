@@ -35,14 +35,16 @@
         <tr>
             <th>Tên Thiết Bị</th>
             <th>Mô Tả</th>
-            <th>Action</th>
+            <th>Đặt Chỗ</th>
+            <th>Đặt Chỗ</th>
         </tr>
         </thead>
 
         <tr th:each="tb: ${listTB}">
             <td th:text="${tb.getTenTB()}"></td>
             <td th:text="${tb.getMoTa()}"></td>
-            <td><a style="color: red;" th:href="@{/user/datcho/{maTB}/{maTV}(maTB=${tb.getMaTB()}, maTV=${MaTV})}">Đặt Chỗ</a></td>
+            <td><a style="color: red;" th:href="@{/user/datcho/{maTB}/{maTV}(maTB=${tb.getMaTB()}, maTV=${MaTV})}">Hom Nay</a></td>
+            <td><a style="color: red;" th:href="@{/user/datchotheongay/{maTB}/{maTV}(maTB=${tb.getMaTB()}, maTV=${MaTV})}">Vào Ngày Khác</a></td>
         </tr>
 
     </table>
