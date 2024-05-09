@@ -5,24 +5,29 @@ import com.springweb.entity.ThietBi;
 import com.springweb.entity.ThongTinSD;
 import com.springweb.service.TTSDService;
 import com.springweb.service.ThanhVienService;
+import com.springweb.service.ThietBiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @Controller
-@RequestMapping("/admin/qlymuontra")
+@RequestMapping("/admin/muontra")
 public class ThongTinSDController {
     @Autowired
     private TTSDService ttsdService;
+
+    @Autowired
+    private ThanhVienService thanhVienService;
+
+    @Autowired
+    private ThietBiService thietBiService;
 
     @GetMapping
     public String viewHomePage(Model model) {
@@ -38,13 +43,29 @@ public class ThongTinSDController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("listTTSD", list);
 
-        return "/admin/qlymuontra";
+        return "xulymuontra/view_all_xulymuontra";
     }
 
+    @GetMapping("/update/{id}")
+    public String updateMuonTra(Model model, @PathVariable("id") Integer maTT) {
+        ThongTinSD thongTinSD = ttsdService.getByMaTT(maTT);
 
+        model.addAttribute("maTV", thongTinSD.getMaTV());
+        model.addAttribute("maTB", thongTinSD.getMaTB());
+        model.addAttribute("tgVao", thongTinSD.getTgVao());
+        model.addAttribute("tgMuon", thongTinSD.getTgMuon());
+        model.addAttribute("tgTra", thongTinSD.getTgTra());
+        model.addAttribute("tgDatCho", thongTinSD.getTgDatCho());
+        model.addAttribute("trang_thai", thongTinSD.getTrang_thai());
 
+        return "xulymuontra/update_muontra";
+    }
 
-
-
-
+    @PostMapping("/update")
+    public String update_MuonTra(@ModelAttribute("ThongTinSD") ThongTinSD thongTinSD) {
+        ThongTinSD tt = ttsdService.getByMaTVAndMaTB(thongTinSD.getMaTV(), thongTinSD.getMaTB());
+        tt.setTrang_thai(thongTinSD.getTrang_thai());
+        ttsdService.Save(thongTinSD);
+        return "redirect:/admin/muontra";
+    }
 }

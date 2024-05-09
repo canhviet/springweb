@@ -14,8 +14,12 @@ public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
     @Query("select case when count(ttsd) > 0 then true else false end from ThongTinSD ttsd where ttsd.thietBi.maTB =:maTB")
     boolean KiemTraTonTai(@Param("maTB") int MaTB);
 
+
     @Query("select distinct tt from ThongTinSD tt where tt.trang_thai = 'dang dat cho'")
     List<ThongTinSD> getThietBiDangDat();
 
     ThongTinSD getByMaTT(int MaTT);
+
+    ThongTinSD getByMaTVAndMaTB(int MaTV, int MaTB);
+
 }

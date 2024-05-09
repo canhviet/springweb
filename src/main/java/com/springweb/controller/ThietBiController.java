@@ -5,7 +5,6 @@ import com.springweb.service.ThietBiService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/thietbi")
 public class ThietBiController {
+
     @Autowired
     private ThietBiService thietBiService;
 
@@ -39,7 +39,7 @@ public class ThietBiController {
     @GetMapping("/delete/{id}")
     public String deleteThietBi(@PathVariable Integer id) {
         thietBiService.DelteThietBi(id);
-        return "redirect:/thietbi";
+        return "redirect:/admin/thietbi";
     }
 
     @GetMapping("/search")
@@ -49,14 +49,16 @@ public class ThietBiController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("listThietBi", list);
 
-        return "thietbi/view_all_thietbi";
+        return "/thietbi/view_all_thietbi";
     }
+
     @GetMapping("/add")
-    public String add_ThietBi(Model model){
+    public String add_ThietBi(Model model) {
         return "thietbi/add_thietbi";
     }
+
     @GetMapping("/update/{id}")
-    public String updateThietBi(Model model, @PathVariable("id") Integer maTB) {
+    public String updateThietBi(@PathVariable("id") Integer maTB, Model model) {
         ThietBi thietBi = thietBiService.getByMaTB(maTB);
 
         model.addAttribute("maTB", thietBi.getMaTB());
@@ -67,20 +69,15 @@ public class ThietBiController {
     }
 
     @PostMapping("/add")
-    public String addThietBi(@Valid @ModelAttribute("ThietBi") ThietBi thietBi, BindingResult bindingResult){
+    public String addThietBi(@Valid @ModelAttribute("ThietBi") ThietBi thietBi, BindingResult bindingResult) {
         thietBiService.SaveThietBi(thietBi);
         return "redirect:/admin/thietbi";
     }
 
     @PostMapping("/update")
     public String updateThietBi(@ModelAttribute("ThietBi") ThietBi thietBi, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-
-        }
 
         thietBiService.SaveThietBi(thietBi);
         return "redirect:/admin/thietbi";
     }
-
-
 }
