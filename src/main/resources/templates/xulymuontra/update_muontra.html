@@ -28,7 +28,7 @@
             <div class="p-3">
                 <div class="form-floating py-1">
                     <input class="form-control border shadow" name="maTV" th:value="${maTV}" />
-                    <label class="ms-2">Tên thành viên</label>
+                    <label class="ms-2">Ma thành viên</label>
                     <span class="text-danger" th:if="${#fields.hasErrors('maTV')}">
                         <span th:errors="*{maTV}"></span>
                     </span>
@@ -37,7 +37,7 @@
             <div class="p-3">
                 <div class="form-floating py-1">
                     <input class="form-control border shadow" name="maTB" th:value="${maTB}" />
-                    <label class="ms-2">Tên thiết bị</label>
+                    <label class="ms-2">Ma thiết bị</label>
                     <span class="text-danger" th:if="${#fields.hasErrors('maTB')}">
                         <span th:errors="*{maTB}"></span>
                     </span>
@@ -45,15 +45,11 @@
             </div>
             <div class="p-3">
                 <div class="form-floating py-1">
-                    <select class="form-select border shadow" name="trang_thai" th:field="*{trang_thai}" required>
-                        <option value="" disabled>Chọn trạng thái</option>
-                        <option value="trong">Trống</option>
-                        <option value="dang dat cho">Đang đặt chỗ</option>
+                    <select class="form-select border shadow" name="trang_thai">
+                        <option value="dang cho muon">Cho Muon</option>
+                        <option value="trong">Da Tra</option>
                     </select>
                     <label class="ms-2">Cập nhật trạng thái</label>
-                    <span class="text-danger" th:if="${#fields.hasErrors('trang_thai')}">
-                        <span th:errors="*{trang_thai}"></span>
-                    </span>
                 </div>
             </div>
             <div class="row pt-2">

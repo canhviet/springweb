@@ -42,11 +42,6 @@ public class TTSDServiceImpl implements TTSDService{
     }
 
     @Override
-    public ThongTinSD getByMaTT(int MaTT) {
-        return ttsdRepository.getByMaTT(MaTT);
-    }
-
-    @Override
     public List<ThongTinSD> getDatCho() {
         return ttsdRepository.getThietBiDangDat();
     }
