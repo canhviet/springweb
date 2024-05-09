@@ -28,7 +28,7 @@ public class TTSDServiceImpl implements TTSDService{
     public Page<ThongTinSD> listAll(int pageNum) {
         int pageSize = 5;
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        Page<ThongTinSD> thongTinSDPage = ttsdRepository.findAll(pageable);
+        Page<ThongTinSD> thongTinSDPage = ttsdRepository.findAllTrangThai(pageable);
 
         return thongTinSDPage;
     }
@@ -51,6 +51,12 @@ public class TTSDServiceImpl implements TTSDService{
     public void Save(ThongTinSD thongTinSD) {
         ttsdRepository.save(thongTinSD);
     }
+
+    @Override
+    public boolean MuonLai(int MaTB, int MaTV) {
+        return ttsdRepository.MuonLai(MaTB, MaTV);
+    }
+
     @Override
     public ThongTinSD getByMaTT(int MaTT) {
         return ttsdRepository.getByMaTT(MaTT);

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -28,6 +29,10 @@ public class ThongTinSDController {
 
     @Autowired
     private ThietBiService thietBiService;
+
+    boolean muon = false;
+
+    boolean tra = false;
 
     @GetMapping
     public String viewHomePage(Model model) {
@@ -52,12 +57,23 @@ public class ThongTinSDController {
 
         model.addAttribute("maTV", thongTinSD.getMaTV());
         model.addAttribute("maTB", thongTinSD.getMaTB());
-        model.addAttribute("tgVao", thongTinSD.getTgVao());
         model.addAttribute("tgMuon", thongTinSD.getTgMuon());
-        model.addAttribute("tgTra", thongTinSD.getTgTra());
         model.addAttribute("tgDatCho", thongTinSD.getTgDatCho());
         model.addAttribute("trang_thai", thongTinSD.getTrang_thai());
 
+        if(LocalDateTime.now().isBefore(thongTinSD.getTgDatCho())) {
+            model.addAttribute("chuatoingay", "chuatoingay");
+        }
+        if(thongTinSD.getTrang_thai().equalsIgnoreCase("dang cho muon")) {
+            tra = true;
+            muon = false;
+            model.addAttribute("dangchomuon", "dangchomuon");
+        }
+        if(thongTinSD.getTrang_thai().equalsIgnoreCase("dang dat cho")) {
+            tra = false;
+            muon = true;
+            model.addAttribute("dangdatcho", "dangdatcho");
+        }
         return "xulymuontra/update_muontra";
     }
 
@@ -65,6 +81,13 @@ public class ThongTinSDController {
     public String update_MuonTra(@ModelAttribute("ThongTinSD") ThongTinSD thongTinSD, @RequestParam("trang_thai") String trang_thai) {
         ThongTinSD tt = ttsdService.getByMaTVAndMaTB(thongTinSD.getMaTV(), thongTinSD.getMaTB());
         tt.setTrang_thai(trang_thai);
+        tt.setTgVao(LocalDateTime.now());
+        if(muon) {
+            tt.setTgMuon(LocalDateTime.now());
+        }
+        if(tra) {
+            tt.setTgTra(LocalDateTime.now());
+        }
         ttsdService.Save(tt);
         return "redirect:/admin/muontra";
     }

@@ -19,7 +19,9 @@
         <input type="text" class="form-control" th:value="${TenTB}" readonly id="tenTB">
         <input type="hidden" th:value="${MaTV}" name="MaTV" readonly>
         <input type="hidden" th:value="${MaTB}" name="MaTB" readonly>
-        <p th:if="${error}" style="color: red">Hien tai khong the dat</p>
+        <label for="ngaydat">Ngay Dat</label>
+        <input type="datetime-local" id="ngaydat" name="ngaydat" class="form-control">
+        <p th:if="${error}" style="color: red">Khong the dat</p>
         <input type="submit" value="submit" class="btn btn-primary">
     </div>
     </form>
