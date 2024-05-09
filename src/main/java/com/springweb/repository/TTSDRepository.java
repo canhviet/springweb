@@ -1,10 +1,14 @@
 package com.springweb.repository;
 
 import com.springweb.entity.ThongTinSD;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
@@ -17,6 +21,13 @@ public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
 
     @Query("select distinct tt from ThongTinSD tt where tt.trang_thai = 'dang dat cho'")
     List<ThongTinSD> getThietBiDangDat();
+
+    Page<ThongTinSD> findBytgVaoNotNull(Pageable pageable);
+
+
+    @Query("SELECT tt FROM ThongTinSD tt WHERE tt.tgVao >= :startDate AND tt.tgVao < :endDate")
+    List<ThongTinSD> findByThangNam(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
 
     ThongTinSD getByMaTT(int MaTT);
 

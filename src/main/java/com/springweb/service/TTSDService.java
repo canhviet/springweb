@@ -4,6 +4,7 @@ import com.springweb.entity.ThietBi;
 import com.springweb.entity.ThongTinSD;
 import org.springframework.data.domain.Page;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TTSDService {
@@ -16,4 +17,11 @@ public interface TTSDService {
     void Save(ThongTinSD thongTinSD);
 
     ThongTinSD getByMaTVAndMaTB(int MaTV, int MaTB);
+
+    Page<ThongTinSD> getThanhVienVao(int pageNum);
+
+    List<ThongTinSD> findByThangNam(int thang, int nam);
+    List<ThongTinSD> findByNam(int nam);
+
+    List<ThongTinSD> findByNgay(LocalDateTime s, LocalDateTime e);
 }

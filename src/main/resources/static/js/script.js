@@ -16,3 +16,7 @@ function clearSearch() {
 function clearSearchThietBi() {
     window.location = "/user";
 }
+
+function clearSearchThongKeTTSD() {
+    window.location = "/admin/thongke/TTSD"
+}
