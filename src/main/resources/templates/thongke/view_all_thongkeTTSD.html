@@ -39,8 +39,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Số lượng thành viên vào khu vực học tập</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="/admin/thongke/TBDangMuon">Thiết bị đang được mượn</a></li>
                     </ul>
                 </li>
             </ul>
@@ -100,6 +99,46 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="row mb-3" th:if="${listTTSD}">
+                            <form th:action="@{/admin/thongke/TTSD/timkiemtheoten}">
+                                <div  th:if="${ngay}">
+                                    <input type="hidden" name="startDay" th:value="${day_start}" />
+                                    <input type="hidden" name="endDay" th:value="${day_end}" />
+                                </div>
+                                <div  th:if="${thang}">
+                                    <input type="hidden" name="startDay" th:value="${week_start}" />
+                                    <input type="hidden" name="endDay" th:value="${week_end}" />
+                                </div>
+                                <div  th:if="${nam}">
+                                    <input type="hidden" name="startDay" th:value="${year_start}" />
+                                    <input type="hidden" name="endDay" th:value="${year_end}" />
+                                </div>
+                                <div class="d-flex flex-row gap-2">
+                                    <input name="txt" type="text" placeholder="Nhập tên thành viên, ngành hoặc khoa" class="form-control border shadow">
+                                    <input type="submit" class="btn btn-primary" value="Tìm kiếm">
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="row mb-3" th:if="${ngay}">
+                            <span class="fw-bold">Tổng lượt trong ngày <span th:text="${#temporals.format(day_start, 'dd/MM/yyyy')}" />: <span th:text="${#lists.size(listTTSD)}"></span></span>
+                        </div>
+                        <div class="row mb-3" th:if="${thang}">
+                            <span class="fw-bold">Tổng lượt vào trong tháng <span th:text="${thang_value}" /> từ
+                                <span th:text="${#temporals.format(mon_start, 'dd/MM/yyyy')}" />
+                                đến
+                                <span th:text="${#temporals.format(mon_end, 'dd/MM/yyyy')}" />:
+                                <span th:text="${#lists.size(listTTSD)}"></span>
+                            </span>
+                        </div>
+                        <div class="row mb-3" th:if="${nam}">
+                            <span class="fw-bold">Tổng lượt vào trong năm
+                                 <span th:text="${nam_value}" />: <span th:text="${#lists.size(listTTSD)}"></span></span>
+                        </div>
+                        <div class="row mb-3" th:if="${ten}">
+                            <span class="fw-bold">Kết quả tìm được: <span th:text="${#lists.size(listTTSD)}"></span></span>
+                        </div>
+
                         <table class="table table-bordered table-striped align-middle text-center">
                             <thead>
                             <tr>
@@ -116,7 +155,7 @@
                                 <td th:text="${ttsd.tenTV}"></td>
                                 <td th:text="${ttsd.thanhVien.khoa}"></td>
                                 <td th:text="${ttsd.thanhVien.nganh}"></td>
-                                <td th:text="${ttsd.tgVao}"></td>
+                                <td th:text="${#temporals.format(ttsd.tgVao, 'dd/MM/yyyy HH:mm:ss')}"></td>
                             </tr>
 
                         </table>
@@ -129,7 +168,7 @@
                                     <span th:unless="${currentPage > 1}"></span>
                                 </li>
                                 <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
-                                    <a th:if="${currentPage != i}" th:href="@{'/admin/thongke/TTSD/page/' + ${i}}" class="page-link">[[${i}]]</a>
+                                    <a th:if="${currentPage != i}" th:href="@{'/admin/thongke/pageTTSD/' + ${i}}" class="page-link">[[${i}]]</a>
                                     <a th:unless="${currentPage != i}" class="page-link active">[[${i}]]</a>
                                 </li>
                                 <li class="page-item">
@@ -140,6 +179,7 @@
                                 </li>
                             </ul>
                         </nav>
+
                     </div>
                 </div>
 </body>

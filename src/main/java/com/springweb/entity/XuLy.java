@@ -25,12 +25,14 @@ public class XuLy {
     private int soTien;
 
     @Column(name = "NgayXL")
+    @NotNull(message = "Vui lòng chọn ngày xử lý")
     private java.time.LocalDateTime ngayXl;
 
     @Column(name = "trang_thaixl")
     private int trangThai;
 
     @Column(name="MaTV")
+    @NotNull(message = "Vui lòng chọn thành viên")
     private int maTv;
 
     @ManyToOne(fetch = FetchType.LAZY)

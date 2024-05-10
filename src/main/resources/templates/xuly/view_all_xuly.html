@@ -39,8 +39,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="./thongke/TTSD">Số lượng thành viên vào khu vực học tập</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="/admin/thongke/TBDangMuon">Thiết bị đang được mượn</a></li>
                     </ul>
                 </li>
             </ul>
@@ -62,21 +61,21 @@
             <div class="col-8">
                 <form th:action="@{/admin/xuly/search}" class="d-flex flex-row gap-1">
                     <span class=" fw-bold form-control-plaintext" style="width: 100px;">Tìm kiếm: </span>
-                    <input type="text" name="keyword" id="keyword" class="form-control border shadow" th:value="${keyword}" required />
-                    <input type="submit" class="btn btn-primary" value="Search" />
+                    <input placeholder="Nhập hình thức xử lý" type="text" name="keyword" id="keyword" class="form-control border shadow" th:value="${keyword}" required />
+                    <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
                     &nbsp;
                 </form>
             </div>
             <div class="col-4 text-end">
                 <a href="/admin/xuly/add" class="btn btn-primary">Thêm</a>
-                <input type="button" class="btn btn-secondary" value="Clear" id="btnClear" onclick="clearSearch()" />
+                <input type="button" class="btn btn-secondary" value="Làm mới" id="btnClear" onclick="clearSearchXuly()" />
             </div>
         </div>
     <table class="table table-bordered table-striped align-middle text-center">
         <thead>
         <tr>
             <th>Mã XL</th>
-            <th>Mã TV</th>
+            <th>Tên thành viên</th>
             <th>Hình thức XL</th>
             <th>Số tiền</th>
             <th>Ngày XL</th>
@@ -90,10 +89,10 @@
             <td th:text="${xl.getThanhVien().getTen()}"></td>
             <td th:text="${xl.getHinhThucXl()}"></td>
             <td th:text="${xl.getSoTien()}"></td>
-            <td th:text="${xl.getNgayXl()}"></td>
-            <td th:text="${xl.getTrangThai() == 1 ? 'Đã xử lý' : 'Chưa xử lý' }"></td>
-            <td><a class="btn btn-primary" th:href="@{/admin/xuly/update/{id}(id=${xl.getMaXl()})}">Update</a>
-                <a class="btn btn-danger" th:href="@{/admin/xuly/delete/{id}(id=${xl.getMaXl()})}">Delete</a>
+            <td th:text="${#temporals.format(xl.getNgayXl(), 'dd/MM/yyyy HH:mm:ss')}"></td>
+            <td th:text="${xl.getTrangThai() == 1 ? 'Đã được xử lý' : 'Đang xử lý' }"></td>
+            <td><a class="btn btn-warning" th:href="@{/admin/xuly/update/{id}(id=${xl.getMaXl()})}">Cập nhật</a>
+                <a class="btn btn-danger" th:href="@{/admin/xuly/delete/{id}(id=${xl.getMaXl()})}">Xóa</a>
             </td>
         </tr>
 
