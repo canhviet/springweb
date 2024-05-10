@@ -98,6 +98,7 @@ public class ThongKeController {
         List<ThongTinSD> filteredList = new ArrayList<>();
 
         if (startDay != null && endDay != null && searchText != null) {
+            System.out.println("---------------------- co start day");
             List<ThongTinSD> list = ttsdService.findByNgay(startDay, endDay);
             for (ThongTinSD ttsd : list) {
                 if (ttsd.getTenTV().toLowerCase().contains(searchText.toLowerCase()) ||
@@ -114,6 +115,8 @@ public class ThongKeController {
             return "thongke/view_all_thongkeTTSD";
         }
         if(startDay == null && endDay == null && searchText != null) {
+            System.out.println("--------------------kooooooo-- co start day");
+
             List<ThongTinSD> list = ttsdService.findBytgVaoNotNull();
             for (ThongTinSD ttsd : list) {
                 if (ttsd.getTenTV().toLowerCase().contains(searchText.toLowerCase()) ||
