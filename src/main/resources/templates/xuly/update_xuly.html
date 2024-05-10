@@ -88,4 +88,17 @@
   </div>
 </div>
 </body>
+<script>
+  function showSoTienInput() {
+    var selectElement = document.getElementById("hinhThucXl");
+    var soTienInput = document.getElementById("soTienInput");
+    var selectedValue = selectElement.value;
+
+    if (selectedValue.includes("Bồi thường mất tài sản")) {
+      soTienInput.style.display = "block";
+    } else {
+      soTienInput.style.display = "none";
+    }
+  }
+</script>
 </html>
