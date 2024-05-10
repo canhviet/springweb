@@ -59,7 +59,7 @@
                         <div class="row mb-3">
                             <form th:action="@{/admin/thanhvien/search}" class="d-flex flex-row gap-1">
                                 <span class=" fw-bold form-control-plaintext" style="width: 100px;">Tìm kiếm: </span>
-                                &nbsp;<input type="text" name="keyword" id="keyword" class="form-control border shadow" th:value="${keyword}" required />
+                                &nbsp;<input placeholder="Nhập tên thành viên" type="text" name="keyword" id="keyword" class="form-control border shadow" th:value="${keyword}" required />
                                 &nbsp;
                                 <input class="btn btn-primary" type="submit" value="Tìm kiếm" />
                                 &nbsp;

@@ -38,4 +38,15 @@ public class XuLy {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MaTV", insertable = false, updatable = false)
     private ThanhVien thanhVien;
+
+    public String getTenTV() {
+        return thanhVien.getTen();
+    }
+    public String getKhoa() {
+        return thanhVien.getKhoa();
+    }
+
+    public String getNganh() {
+        return thanhVien.getNganh();
+    }
 }

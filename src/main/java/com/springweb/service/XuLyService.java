@@ -17,4 +17,6 @@ public interface XuLyService {
     List<XuLy> searchList(String keyword);
 
     boolean DangViPham(int MaTV);
+
+    List<XuLy> getList();
 }

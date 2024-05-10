@@ -63,4 +63,9 @@ public class XuLyServiceImpl implements XuLyService{
     public boolean DangViPham(int MaTV) {
         return xuLyRepository.DangViPham(MaTV);
     }
+
+    @Override
+    public List<XuLy> getList() {
+        return xuLyRepository.findAll();
+    }
 }

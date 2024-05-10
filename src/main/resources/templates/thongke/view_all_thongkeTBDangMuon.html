@@ -53,7 +53,7 @@
     <div class="card-header bg-success bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center text-white">
-                <h2>Thống kê các thiết bị đang được mượn</h2>
+                <h2>Thống kê các thiết bị được mượn</h2>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
         </div>
 
         <div class="row mb-3" th:if="${trongtuan}">
-            <span class="fw-bold">Tổng lượt mượn trong tuần: <span th:text="${#lists.size(listTTSD)}"></span></span>
+            <span class="fw-bold">Tổng lượt mượn trong tuần từ <span th:text="${#temporals.format(week_start, 'dd/MM/yyyy')}" /> đến  <span th:text="${#temporals.format(week_end, 'dd/MM/yyyy')}" />: <span th:text="${#lists.size(listTTSD)}"></span></span>
         </div>
         <div class="row mb-3" th:if="${homnay}">
             <span class="fw-bold">Tổng lượt mượn hôm nay: <span th:text="${#lists.size(listTTSD)}"></span></span>

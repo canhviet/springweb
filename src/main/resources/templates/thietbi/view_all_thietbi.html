@@ -61,7 +61,7 @@
                             <div class="col-9">
                                 <form th:action="@{/admin/thietbi/search}" class="d-flex flex-row gap-1">
                                     <span class=" fw-bold form-control-plaintext" style="width: 100px;">Tìm kiếm: </span>
-                                    &nbsp;<input type="text" name="keyword" id="keyword" class="form-control border shadow" th:value="${keyword}" required />
+                                    &nbsp;<input placeholder="Nhập tên thiết bị" type="text" name="keyword" id="keyword" class="form-control border shadow" th:value="${keyword}" required />
                                     <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
                                 </form>
                             </div>

@@ -1,5 +1,6 @@
 package com.springweb.controller;
 
+import com.springweb.entity.ThongTinSD;
 import com.springweb.entity.XuLy;
 import com.springweb.entity.ThanhVien;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -95,10 +97,16 @@ public class XuLyController {
 
     @GetMapping("/search")
     public String searchThietBi(Model model, @RequestParam("keyword") String keyword) {
-        List<XuLy> list = xuLyServiceservice.searchList(keyword);
-
+        List<XuLy> list = xuLyServiceservice.getList();
+        List<XuLy> filteredList = new ArrayList<>();
+        for (XuLy xl : list) {
+            if(xl.getHinhThucXl().toLowerCase().contains(keyword.toLowerCase()) ||
+            xl.getTenTV().toLowerCase().contains(keyword.toLowerCase())) {
+                filteredList.add(xl);
+            }
+        }
         model.addAttribute("keyword", keyword);
-        model.addAttribute("listXuLy", list);
+        model.addAttribute("listXuLy", filteredList);
 
         return "/xuly/view_all_xuly";
     }

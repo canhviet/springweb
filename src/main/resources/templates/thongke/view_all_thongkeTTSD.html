@@ -121,7 +121,7 @@
                         </div>
 
                         <div class="row mb-3" th:if="${ngay}">
-                            <span class="fw-bold">Tổng lượt trong ngày <span th:text="${#temporals.format(day_start, 'dd/MM/yyyy')}" />: <span th:text="${#lists.size(listTTSD)}"></span></span>
+                            <span class="fw-bold">Tổng lượt vào trong ngày <span th:text="${#temporals.format(day_start, 'dd/MM/yyyy')}" />: <span th:text="${#lists.size(listTTSD)}"></span></span>
                         </div>
                         <div class="row mb-3" th:if="${thang}">
                             <span class="fw-bold">Tổng lượt vào trong tháng <span th:text="${thang_value}" /> từ
