@@ -28,3 +28,7 @@ function clearSearchThongKeTBDangMuon() {
 function clearSearchXuly() {
     window.location = "/admin/xuly";
 }
+
+function clearSearchThietBiUser() {
+    window.location = "/user";
+}
