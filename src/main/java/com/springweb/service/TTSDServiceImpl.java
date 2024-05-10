@@ -20,10 +20,6 @@ import java.util.List;
 public class TTSDServiceImpl implements TTSDService{
     @Autowired
     private TTSDRepository ttsdRepository;
-    @Autowired
-    private ThanhVienRepository thanhVienRepository;
-    @Autowired
-    private ThietBiRepository thietBiRepository;
 
     @Override
     public Page<ThongTinSD> listAll(int pageNum) {
@@ -33,11 +29,6 @@ public class TTSDServiceImpl implements TTSDService{
 
         return thongTinSDPage;
     }
-    public boolean KiemTraTrangThai(String tt, int MaTB) {
-        return ttsdRepository.KiemTraTrangThai(tt, MaTB);
-    }
-
-
 
     @Override
     public boolean KiemTraTonTai(int MaTB) {

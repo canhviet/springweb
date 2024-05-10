@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface TTSDService {
     Page<ThongTinSD> listAll(int pageNum);
-    boolean KiemTraTrangThai(String tt, int MaTB);
     boolean KiemTraTonTai(int MaTB);
 
     ThongTinSD getByMaTT(int MaTT);

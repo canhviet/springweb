@@ -50,13 +50,22 @@ public class AppController {
         return duration.toHours() > 1;
     }
 
-    public boolean isSameDay(LocalDateTime date, int MaTB) {
+    public boolean KiemTra(LocalDateTime date, int MaTB) {
         List<ThongTinSD> list = ttsdService.getByMaTB(MaTB);
         for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).getTgDatCho().getYear() == date.getYear() &&
-               list.get(i).getTgDatCho().getMonthValue() == date.getMonthValue() &&
-               list.get(i).getTgDatCho().getDayOfMonth() == date.getDayOfMonth()) {
-                return true;
+            if(list.get(i).getTrang_thai().equalsIgnoreCase("dang dat cho")) {
+                if(list.get(i).getTgDatCho().getYear() == date.getYear() &&
+                   list.get(i).getTgDatCho().getMonthValue() == date.getMonthValue() &&
+                   list.get(i).getTgDatCho().getDayOfMonth() == date.getDayOfMonth()) {
+                    return true;
+                }
+            }
+            if(list.get(i).getTrang_thai().equalsIgnoreCase("dang cho muon")) {
+                if(list.get(i).getTgDatCho().getYear() == date.getYear() &&
+                   list.get(i).getTgDatCho().getMonthValue() == date.getMonthValue() &&
+                   list.get(i).getTgDatCho().getDayOfMonth() == date.getDayOfMonth()) {
+                    return true;
+                }
             }
         }
         return false;
@@ -201,7 +210,7 @@ public class AppController {
             return "redirect:/user";
         }
 
-        if (!isSameDay(ngayDat, MaTB)) {
+        if (!KiemTra(ngayDat, MaTB)) {
             if(ttsdService.MuonLai(MaTB, MaTV)) {
                 thongTinSD = ttsdService.getByMaTVAndMaTB(MaTV, MaTB);
                 thongTinSD.setTrang_thai("dang dat cho");
@@ -216,6 +225,7 @@ public class AppController {
             ttsdService.Save(thongTinSD);
             return "redirect:/user";
         }
+
 
         model.addAttribute("MaTV", MaTV);
         model.addAttribute("MaTB", MaTB);
