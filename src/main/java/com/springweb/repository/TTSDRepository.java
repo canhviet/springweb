@@ -24,6 +24,9 @@ public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
 
     Page<ThongTinSD> findBytgVaoNotNull(Pageable pageable);
 
+    List<ThongTinSD> findBytgVaoNotNull();
+
+
     @Query("SELECT tt FROM ThongTinSD tt WHERE tt.tgVao >= :startDate AND tt.tgVao < :endDate")
     List<ThongTinSD> findByThangNam(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
@@ -42,7 +45,10 @@ public interface TTSDRepository extends JpaRepository<ThongTinSD, Integer> {
     List<ThongTinSD> findByTgMuonNotNull();
 
 
+
+
     @Query("SELECT tt FROM ThongTinSD tt WHERE tt.tgMuon >= :startDate AND tt.tgMuon < :endDate")
     List<ThongTinSD> getTbDangMuonTheoTime(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
 
 }

@@ -55,24 +55,89 @@ public class ThongKeController {
             List<ThongTinSD> list = ttsdService.findByNgay(startDateTime,endDateTime);
             model.addAttribute("listTTSD", list);
             model.addAttribute("search", true);
+            model.addAttribute("ngay", true);
+            model.addAttribute("day_start", startDateTime);
+            model.addAttribute("day_end", endDateTime);
             return "thongke/view_all_thongkeTTSD";
         }
         if (thang != 0) {
             int namHienTai = Year.now().getValue();
-            List<ThongTinSD> list = ttsdService.findByThangNam(thang,namHienTai);
+            LocalDateTime startDate = LocalDateTime.of(namHienTai, thang, 1, 0, 0);
+            LocalDateTime endDate = LocalDateTime.of(namHienTai, thang, YearMonth.of(namHienTai, thang).lengthOfMonth(), 23, 59, 59);
+            List<ThongTinSD> list = ttsdService.findByNgay(startDate,endDate);
             model.addAttribute("listTTSD", list);
             model.addAttribute("search", true);
+            model.addAttribute("thang", true);
+            model.addAttribute("thang_value", thang);
+            model.addAttribute("mon_start", startDate);
+            model.addAttribute("mon_end", endDate);
+
             return "thongke/view_all_thongkeTTSD";
         }
         if (nam != 0) {
-            List<ThongTinSD> list = ttsdService.findByNam(nam);
+            LocalDateTime startDate = LocalDateTime.of(nam, 1, 1, 0, 0);
+            LocalDateTime endDate = LocalDateTime.of(nam, 12, 31, 23, 59, 59);
+            List<ThongTinSD> list = ttsdService.findByNgay(startDate,endDate);
             model.addAttribute("listTTSD", list);
             model.addAttribute("search", true);
+            model.addAttribute("nam", true);
+            model.addAttribute("nam_value", nam);
+            model.addAttribute("year_start", startDate);
+            model.addAttribute("year_end", endDate);
             return "thongke/view_all_thongkeTTSD";
         }
         return "redirect:/admin/thongke/TTSD";
     }
 
+    @GetMapping("/TTSD/timkiemtheoten")
+    public String searchTTSDTheoTen(Model model,
+                                    @RequestParam(value = "txt", required = false) String searchText,
+                                    @RequestParam(value = "startDay", required = false) LocalDateTime startDay,
+                                    @RequestParam(value = "endDay", required = false) LocalDateTime endDay) {
+
+        List<ThongTinSD> filteredList = new ArrayList<>();
+
+        if (startDay != null && endDay != null && searchText != null) {
+            System.out.println("---------------------- co start day");
+            List<ThongTinSD> list = ttsdService.findByNgay(startDay, endDay);
+            for (ThongTinSD ttsd : list) {
+                if (ttsd.getTenTV().toLowerCase().contains(searchText.toLowerCase()) ||
+                        ttsd.getKhoa().toLowerCase().contains(searchText.toLowerCase()) ||
+                        ttsd.getNganh().toLowerCase().contains(searchText.toLowerCase())
+                        ) {
+                    filteredList.add(ttsd);
+                }
+            }
+            model.addAttribute("listTTSD", filteredList);
+            model.addAttribute("search", true);
+            model.addAttribute("ten", true);
+
+            return "thongke/view_all_thongkeTTSD";
+        }
+        if(startDay == null && endDay == null && searchText != null) {
+            System.out.println("--------------------kooooooo-- co start day");
+
+            List<ThongTinSD> list = ttsdService.findBytgVaoNotNull();
+            for (ThongTinSD ttsd : list) {
+                if (ttsd.getTenTV().toLowerCase().contains(searchText.toLowerCase()) ||
+                        ttsd.getKhoa().toLowerCase().contains(searchText.toLowerCase()) ||
+                        ttsd.getNganh().toLowerCase().contains(searchText.toLowerCase())) {
+                    filteredList.add(ttsd);
+                }
+            }
+            model.addAttribute("listTTSD", filteredList);
+            model.addAttribute("search", true);
+            model.addAttribute("ten", true);
+
+            return "thongke/view_all_thongkeTTSD";
+        }
+        model.addAttribute("listTTSD", filteredList);
+        model.addAttribute("search", true);
+        model.addAttribute("ten", true);
+        return "redirect:/admin/thongke/TTSD";
+    }
+
+//    *********************************************************************************
     // thong ke tb dang muon
     @GetMapping("/TBDangMuon")
     public String viewThongKeTBDangMuon(Model model) {
@@ -99,8 +164,6 @@ public class ThongKeController {
         if (startDay != null && endDay != null) {
             LocalDateTime startDateTime = LocalDateTime.of(startDay, LocalTime.MIN);
             LocalDateTime endDateTime = LocalDateTime.of(endDay, LocalTime.MAX);
-            System.out.println("------------------sssssss" + startDateTime);
-            System.out.println("------------------eeeeee" +  endDateTime );
             List<ThongTinSD> list = ttsdService.getTbDangMuonTheoTime(startDateTime, endDateTime);
             model.addAttribute("listTTSD", list);
             model.addAttribute("search", true);
@@ -145,9 +208,11 @@ public class ThongKeController {
         return "thongke/view_all_thongkeTBDangMuon";
     }
 
+
+
     @GetMapping("/TBDangMuon/timkiemtheoten")
     public String searchTBDangDcMuonTheoTen(Model model,
-                                   @RequestParam(value = "txt", required = false) String searchText,
+                                            @RequestParam(value = "txt", required = false) String searchText,
                                             @RequestParam(value = "startDay", required = false) LocalDateTime startDay,
                                             @RequestParam(value = "endDay", required = false) LocalDateTime endDay) {
 
